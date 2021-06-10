@@ -1,6 +1,10 @@
 # Crypto Base App #
 
-This project is for Quick setup of a ReactJS Frontend application connecting to Smart Contract applications.
+Custom Boiler Plate for setting up a React JS and Truffle Web Dapp
+
+1. Utilizes Functional React Javascript Framework
+2. Truffle Smart Contract Development Framework
+3. Styled Components for styling
 
 ## Architechture ##
 This app uses a mono-repo structure.
@@ -20,3 +24,4 @@ The smart contracts artifacts are stored in the ReactJS src/contract-artifacts/ 
     3. cd into web client
         1. remove src/contract-artifacts
             * this dir will be recreated upon migration
+

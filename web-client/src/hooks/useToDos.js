@@ -24,17 +24,15 @@ export default function useToDos(currentAccount){
             const netID = await web3.eth.net.getId()
 
             const todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address) 
-
-
             const taskCount = await todoList.methods.taskCount().call()
             
             let taskArr = []
 
-            let itterCount = 0
+            let itterCount = 1
 
             try {
-                while ( itterCount < taskCount){
-                    let task = await todoList.methods.tasks(itterCount + 1).call()
+                while ( itterCount <= taskCount){
+                    let task = await todoList.methods.tasks(itterCount).call()
                     taskArr.push(task)
                     itterCount++
                 }
@@ -42,11 +40,10 @@ export default function useToDos(currentAccount){
                 console.log(err)
             }
             
-
-            const todoCount = await todoList.methods.taskCount().call()
+            // this will return an array which is faster for the client but not better for the contract
             const tasksArray = await todoList.methods.getTasksArray().call()
 
-            setToDos({tasks: taskArr, tasksArray: tasksArray, taskCount: todoCount})
+            setToDos({tasks: taskArr, tasksArray: tasksArray, taskCount: taskCount})
         }   
 
 
@@ -65,7 +62,7 @@ export default function useToDos(currentAccount){
 
         try {
             const createdTask = await todoList.methods.createTask(content).send({from: currentAccount})
-            console.log(createdTask)
+            console.log(createdTask.events)
             setLoading(false)
         } catch (err){
             console.log(err)

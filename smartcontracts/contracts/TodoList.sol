@@ -29,6 +29,12 @@ contract TodoList {
         bool completed
     );
 
+    event TaskCompleted(
+        uint id,
+        string content,
+        bool completed
+    );
+
 
 
     // creates a task
@@ -44,13 +50,17 @@ contract TodoList {
 
     }
 
-    // function toggleCompleted(uint id) public {
 
-    //     Task memory _task = tasks[_id];
-    //     // toggle by turning it to the opposite
-    //     _task.completed = !_task.completed;
-    //     tasks[_id] = _task;
-    // }
+    // toggles completion of the task
+    function toggleCompleted(uint _id) public {
+
+        Task memory _task = tasks[_id];
+        // toggle by turning it to the opposite
+        _task.completed = !_task.completed;
+        tasks[_id] = _task;
+
+        emit TaskCompleted(_id, _task.content, _task.completed);
+    }
 
     // returns an array of all of the tasks
     function getTasksArray() public view returns(Task[] memory){

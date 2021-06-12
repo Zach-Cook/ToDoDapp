@@ -9,6 +9,8 @@ export default function ToDoContainer(props){
     // holds the state of the new value
     const [ newTodo, setNewTodo ] = useState("")
 
+
+
     return (
 
         <>
@@ -26,7 +28,7 @@ export default function ToDoContainer(props){
                        
                         <Todo.TaskFrame key={todo.id}>
                             <Todo.TaskItemFrame>
-                                <Todo.CheckBox type="checkbox"/>
+                                <Todo.CheckBox type="checkbox" checked={todo.completed} onClick={()=>props.toggleCompletion(todo.id)}/>
                                 <Todo.Text>{index+1}.) {todo.content}</Todo.Text>
                                 <Todo.Text style={{color: "#fa314a", cursor: "pointer"}}>Remove</Todo.Text>
                             </Todo.TaskItemFrame>

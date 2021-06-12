@@ -81,8 +81,25 @@ export default function useToDos(currentAccount){
         
     }
 
+    // toggles the check mark on the completed
+    async function toggleCompletion(id){
+        setLoading(true)
+        const web3 = new Web3(window.ethereum)
+        const netID = await web3.eth.net.getId()
+        const todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address)
 
-    async function toggleCompleted(){
+        try {
+            const completed = await todoList.methods.toggleCompleted(id).send({from: currentAccount})
+            // get the values from the smart contract event
+            const completedTaskVals = completed.events.TaskCompleted.returnValues
+            // use the event to create a new object to be pushed to the array
+            const newData = {id: completedTaskVals.id, content: completedTaskVals.content,  completed: completedTaskVals.completed}
+
+            console.log(newData)
+
+        } catch (err){
+            console.log(err)
+        }
 
     }
 
@@ -96,6 +113,6 @@ export default function useToDos(currentAccount){
     }
 
 
-    return { todos, setToDos, createTask, loading}
+    return { todos, setToDos, createTask, toggleCompletion, loading}
 
 }

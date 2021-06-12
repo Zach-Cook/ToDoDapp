@@ -84,9 +84,11 @@ export default function useToDos(currentAccount){
     // toggles the check mark on the completed
     async function toggleCompletion(id){
         setLoading(true)
+
         const web3 = new Web3(window.ethereum)
         const netID = await web3.eth.net.getId()
         const todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address)
+        let currentTaskArr = [...todos.tasks]
 
         try {
             const completed = await todoList.methods.toggleCompleted(id).send({from: currentAccount})
@@ -95,7 +97,7 @@ export default function useToDos(currentAccount){
             // use the event to create a new object to be pushed to the array
             const newData = {id: completedTaskVals.id, content: completedTaskVals.content,  completed: completedTaskVals.completed}
 
-            console.log(newData)
+            // need to update client state
 
         } catch (err){
             console.log(err)

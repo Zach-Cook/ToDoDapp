@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { Fragment} from 'react';
 import HeaderContainer from '../containers/header';
-import BodyContainer from '../containers/body';
 import MainContainer from '../containers/main';
-import NavigationContainer from '../containers/navigation';
 import FooterContainer from '../containers/footer';
+
+
+// custom hooks
+import useLoadCurrentUser from '../hooks/useLoadCurrentUser'
 
 
 export default function Home(){
 
+    const { userState } = useLoadCurrentUser()
+
+
     return (
-        <>
-            <HeaderContainer>
-                <NavigationContainer/>
-            </HeaderContainer>
-            <BodyContainer>
-                <MainContainer>
-                </MainContainer>
-            </BodyContainer>
+        <Fragment>
+            <HeaderContainer userState={userState}/>
+
+            <MainContainer userState={userState}>
+
+            </MainContainer>
+
             <FooterContainer>
-                <NavigationContainer/>
             </FooterContainer>
-        </>
+        </Fragment>
 
 
     )

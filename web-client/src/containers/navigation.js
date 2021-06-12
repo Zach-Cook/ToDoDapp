@@ -4,21 +4,17 @@ import React from 'react'
 import { Navigation } from '../components';
 
 
-// custom hooks
-import useLoadCurrentUser from '../hooks/useLoadCurrentUser'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 
-export default function NavigationContainer() {
+export default function NavigationContainer(props) {
 
-    const { userState } = useLoadCurrentUser()
-
-    console.log(userState)
 
 
     return (
         <Navigation>
-
+            <FontAwesomeIcon icon={faUser} color="white"/> 
         </Navigation>
-
     )
 }

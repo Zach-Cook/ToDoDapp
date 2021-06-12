@@ -3,8 +3,32 @@ import styled from 'styled-components';
 
 export const NavigationFrame = styled.nav`
 
-    height: 100px;
     width: 100%;
-    border: 2px solid pink;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
+
+export const NavInnerFrame = styled.div`
+
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid orange;
+`
+
+export const Title = styled.h1`
+
+    color: #FFFFFF;
+    font-size: 32px;
+
+`
+
+export const TitleText = styled.p`
+
+    color: #FFFFFF;
+    font-size: 18px;
+
+`

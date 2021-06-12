@@ -4,7 +4,7 @@ import Web3 from 'web3';
 export default function useLoadCurrentUser(){
 
     const [ userState, setUserState ] = useState({})
-    const [ checkUser, setCheckUser ] = useState(false)
+    // const [ checkUser, setCheckUser ] = useState(false)
 
     useEffect(()=>{
 
@@ -43,7 +43,7 @@ export default function useLoadCurrentUser(){
 
             return ()=> setUserState(null)
 
-    }, [checkUser])
+    }, [])
 
 
 

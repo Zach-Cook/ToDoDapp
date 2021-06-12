@@ -16,7 +16,6 @@ export const NavInnerFrame = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    border: 2px solid orange;
 `
 
 export const Title = styled.h1`

@@ -62,7 +62,17 @@ export default function useToDos(currentAccount){
 
         try {
             const createdTask = await todoList.methods.createTask(content).send({from: currentAccount})
-            console.log(createdTask.events)
+
+            let currentTaskArr = [...todos.tasks]
+
+            // get the values from the smart contract event
+            const createdTaskVals = createdTask.events.TaskCreated.returnValues
+            // use the event to create a new object to be pushed to the array
+            const newData = {id: createdTaskVals.id, content: createdTaskVals.content,  completed: createdTaskVals.completed}
+            currentTaskArr.push(newData)
+            // set the state
+            setToDos({tasksArray: currentTaskArr, tasks: currentTaskArr, taskCount: (todos.taskCount + 1)})
+
             setLoading(false)
         } catch (err){
             console.log(err)

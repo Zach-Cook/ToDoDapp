@@ -8,7 +8,7 @@ contract TodoList {
     uint public taskCount = 0;
 
 
-    // Data Type
+    // Task Data Type
     struct Task {
         uint id;
         string content;
@@ -16,17 +16,35 @@ contract TodoList {
         address user;
     }
 
-
+    // data structures for holding the tasks
+    // using mapping
     mapping(uint => Task) public tasks;
+    // using array
     Task[] public tasksArray; 
+
+    // this is an ethereum event for clients
+    event TaskCreated(
+        uint id,
+        string content,
+        bool completed
+    );
+
+
 
     // creates a task
     function createTask(string memory _content) public {
 
         taskCount ++;
+        // adding to the mapping
         tasks[taskCount] = Task(taskCount, _content, false, msg.sender); 
+        // adding to the array
         tasksArray.push(Task(taskCount, _content, false, msg.sender));
+
+        emit TaskCreated(taskCount, _content, false);
+
     }
+
+
 
     // returns an array of all of the tasks
     function getTasksArray() public view returns(Task[] memory){

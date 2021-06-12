@@ -20,7 +20,7 @@ contract TodoList {
     mapping(uint => Task) public tasks;
     Task[] public tasksArray; 
 
-
+    // creates a task
     function createTask(string memory _content) public {
 
         taskCount ++;
@@ -34,12 +34,10 @@ contract TodoList {
     }
 
     
-    constructor() public {
+    constructor() {
 
         // Create a base task on creation of the contract
         createTask("Check out Zachcook.io");
-        createTask("Testing here");
-        createTask("Also another test");
     }
 
 }

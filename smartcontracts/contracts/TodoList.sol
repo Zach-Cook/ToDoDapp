@@ -44,7 +44,13 @@ contract TodoList {
 
     }
 
+    function toggleCompleted(uint id) public {
 
+        Task memory _task = tasks[_id];
+        // toggle by turning it to the opposite
+        _task.completed = !_task.completed;
+        tasks[_id] = _task;
+    }
 
     // returns an array of all of the tasks
     function getTasksArray() public view returns(Task[] memory){

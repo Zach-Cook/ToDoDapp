@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Todo } from '../components';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRemove } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function ToDoContainer(props){
 
-    console.log(props)
+    // holds the state of the new value
+    const [ newTodo, setNewTodo ] = useState("")
 
     return (
 
@@ -17,19 +16,19 @@ export default function ToDoContainer(props){
             <Todo>
 
                 <Todo.NewTaskFrame>
-                    <Todo.Input place="Add an item"/>
-                    <Todo.Button>Add</Todo.Button>
+                    <Todo.Input place="Add an item" onChange={(e)=> setNewTodo(e.target.value)}/>
+                    <Todo.Button onClick={(e)=> props.createTask(newTodo)}>Add</Todo.Button>
                 </Todo.NewTaskFrame>
 
                 {
-                    props.todos.tasksArray ?
-                    props.todos.tasksArray.map((todo, index)=>(
+                    props.todos.tasks ?
+                    props.todos.tasks.map((todo, index)=>(
                        
                         <Todo.TaskFrame key={todo.id}>
                             <Todo.TaskItemFrame>
                                 <Todo.CheckBox type="checkbox"/>
                                 <Todo.Text>{index+1}.) {todo.content}</Todo.Text>
-                                <Todo.Text style={{color: "#fa314a", cursor: "pointer"}} >Remove</Todo.Text>
+                                <Todo.Text style={{color: "#fa314a", cursor: "pointer"}}>Remove</Todo.Text>
                             </Todo.TaskItemFrame>
                         </Todo.TaskFrame>
                   

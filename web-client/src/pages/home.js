@@ -11,7 +11,7 @@ import useToDos from '../hooks/useToDos';
 export default function Home(){
 
     const { userState } = useLoadCurrentUser()
-    const { todos } = useToDos()
+    const { todos, setToDos, createTask, loading } = useToDos(userState.account)
 
     // console.log(todos.tasks ? todos.tasks.content : null)
 
@@ -20,7 +20,13 @@ export default function Home(){
             <HeaderContainer userState={userState}/>
 
             <MainContainer userState={userState}>
-                <TodoContainer todos={todos}></TodoContainer>
+                <TodoContainer 
+                    todos={todos} 
+                    setToDos={setToDos} 
+                    createTask={createTask}
+                    userState={userState}
+                    loading={loading}
+                />
             </MainContainer>
 
             <FooterContainer>

@@ -28,14 +28,19 @@ export const Input = styled.input`
     border: none;
     height: 60px;
     width: 65%;
+    color: #262626;
+    font-size: 1rem;
+    font-style: normal;
+    line-height: 23px;
+    letter-spacing: 1.8000001907348633px;
+    text-align: left;
+    padding-left: 1.2rem;
 
     ::placeholder,
     ::-webkit-input-placeholder {
-        //styleName: p / fields;
         color: #262626;
         font-size: 1rem;
         font-style: normal;
-        font-weight: 700;
         line-height: 23px;
         letter-spacing: 1.8000001907348633px;
         text-align: left;

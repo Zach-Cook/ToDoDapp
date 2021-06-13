@@ -27,7 +27,7 @@ export default function useLoadCurrentUser(){
         
         
             } else {
-              window.alert("Please install Metamask")
+              window.alert("You must install MetaMask to interact with this application")
             }}
 
             loadUser()

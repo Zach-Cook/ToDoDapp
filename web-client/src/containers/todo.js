@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
 import { Todo } from '../components';
-
-
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function ToDoContainer(props){
 
@@ -14,6 +14,9 @@ export default function ToDoContainer(props){
         color: "#EF5354", cursor: "pointer", textAlign: "center"
     }
 
+    const spinnerStyles={
+        margin: "250px", color: "white", height: "100px", width: "100px"
+    }
 
     return (
 
@@ -44,7 +47,7 @@ export default function ToDoContainer(props){
                  
                     ))
                     :
-                    null
+                    <FontAwesomeIcon icon={faSpinner} style={spinnerStyles} className={"fa-spin"}/>
                 }
 
             </Todo>

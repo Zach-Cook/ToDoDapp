@@ -70,7 +70,7 @@ export const TaskFrame = styled.div`
 
 export const TaskItemFrame = styled.div`
 
-    width: 45%;
+    min-width: 65%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -81,11 +81,13 @@ export const CheckBox = styled.input`
 
     height: 20px;
     width:  20px;
+    cursor: pointer;
 `;
 
 export const Text = styled.p`
 
     font-size: 24px;
     color: #ffffff;
-
+    width: 40%;
+    text-align: center;
 `;

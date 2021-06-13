@@ -9,7 +9,6 @@ export default function useToDos(currentAccount){
 
     const [ todos, setToDos ] = useState({
         tasks: null,
-        tasksArray: null,
         taskCount: null,
     })
 
@@ -39,11 +38,9 @@ export default function useToDos(currentAccount){
             } catch (err){
                 console.log(err)
             }
-            
-            // this will return an array which is faster for the client but not better for the contract
-            const tasksArray = await todoList.methods.getTasksArray().call()
 
-            setToDos({tasks: taskArr, tasksArray: tasksArray, taskCount: taskCount})
+
+            setToDos({tasks: taskArr, taskCount: taskCount})
         }   
 
 
@@ -71,7 +68,7 @@ export default function useToDos(currentAccount){
             const newData = {id: createdTaskVals.id, content: createdTaskVals.content,  completed: createdTaskVals.completed}
             currentTaskArr.push(newData)
             // set the state
-            setToDos({tasksArray: currentTaskArr, tasks: currentTaskArr, taskCount: (todos.taskCount + 1)})
+            setToDos({tasks: currentTaskArr, taskCount: (todos.taskCount + 1)})
 
             setLoading(false)
         } catch (err){
@@ -91,8 +88,6 @@ export default function useToDos(currentAccount){
         let currentTaskArr = [...todos.tasks]
 
         try {
-
-            console.log(currentTaskArr)
             const completed = await todoList.methods.toggleCompleted(id).send({from: currentAccount})
             // get the values from the smart contract event
             const completedTaskVals = completed.events.TaskCompleted.returnValues
@@ -102,7 +97,7 @@ export default function useToDos(currentAccount){
             const indexOfItem = currentTaskArr.map(e => e.id).indexOf(newData.id);
             currentTaskArr[indexOfItem] = newData
 
-            setToDos({...todos, tasksArray: currentTaskArr, tasks: currentTaskArr})
+            setToDos({...todos, tasks: currentTaskArr})
             // need to update client state
 
         } catch (err){

@@ -21,9 +21,20 @@ export default function useToDos(currentAccount){
 
             // get the network id
             const netID = await web3.eth.net.getId()
+            
 
-            const todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address) 
-            const taskCount = await todoList.methods.taskCount().call()
+            // this handles the chain id
+            // currently if not on test net then this will cleanup the hook
+            let todoList;
+            let taskCount;
+            if (netID === 5777){
+                todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address) 
+                taskCount = await todoList.methods.taskCount().call()
+            } else {
+                setLoading(false)
+                return ()=> null
+            }
+
             
             let taskArr = []
 
@@ -122,10 +133,10 @@ export default function useToDos(currentAccount){
         try {
 
             const deletedTask = await todoList.methods.removeTask(id).send({from: currentAccount})
-
             const indexOfItem = currentTaskArr.map(e => e.id).indexOf(currentTaskArr.id);
             currentTaskArr.splice(indexOfItem, 1)
             setToDos({...todos, tasks: currentTaskArr})
+
         } catch (err){
             console.log(err)
         }

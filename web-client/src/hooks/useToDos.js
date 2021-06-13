@@ -32,7 +32,14 @@ export default function useToDos(currentAccount){
             try {
                 while ( itterCount <= taskCount){
                     let task = await todoList.methods.tasks(itterCount).call()
-                    taskArr.push(task)
+                    
+                    // needs to check if the id is "0" before adding to the array
+                    // this is because in the EVM when a mapping is deleted it is set to "0"
+                    // The data is not completely removed from disk space
+                    if (task.id !== "0"){
+                        taskArr.push(task)
+                    }
+                    
                     itterCount++
                 }
             } catch (err){
@@ -107,15 +114,28 @@ export default function useToDos(currentAccount){
     }
 
     // this will remove the task from the list
-    async function removeTask(){
+    async function removeTask(id){
 
         const web3 = new Web3(window.ethereum)
         const netID = await web3.eth.net.getId()
         const todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address)
+        let currentTaskArr = [...todos.tasks]
+
+        try {
+
+            const deletedTask = await todoList.methods.removeTask(id).send({from: currentAccount})
+
+            const indexOfItem = currentTaskArr.map(e => e.id).indexOf(currentTaskArr.id);
+            currentTaskArr.splice(indexOfItem, 1)
+            setToDos({...todos, tasks: currentTaskArr})
+        } catch (err){
+            console.log(err)
+        }
+        
 
     }
 
 
-    return { todos, setToDos, createTask, toggleCompletion, loading}
+    return { todos, setToDos, createTask, removeTask, toggleCompletion, loading}
 
 }

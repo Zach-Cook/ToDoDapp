@@ -23,7 +23,7 @@ export default function ToDoContainer(props){
 
                 <Todo.NewTaskFrame>
                     <Todo.Input place="Add an item" onChange={(e)=> setNewTodo(e.target.value)}/>
-                    <Todo.Button onClick={(e)=> props.createTask(newTodo)}>Add</Todo.Button>
+                    <Todo.Button onClick={(e)=> props.createTask(newTodo)} disabled={newTodo.length > 0 ? false : true}>Add</Todo.Button>
                 </Todo.NewTaskFrame>
 
                 {

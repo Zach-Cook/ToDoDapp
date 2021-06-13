@@ -7,4 +7,5 @@ export const HeaderFrame = styled.header`
 
     display: flex;
     align-items: center;
+    background: #252C31;
 `;

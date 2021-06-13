@@ -12,9 +12,13 @@ export default function HeaderContainer({children, ...restProps}){
         <Header {...restProps}>
             <Navigation>
                 <Navigation.NavInnerFrame>
-                    <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px"}}/>
-                    <Navigation.TitleText>Account: {restProps.userState ? restProps.userState.account : null}</Navigation.TitleText>
+                    
                     <Navigation.Title>To Do Dapp</Navigation.Title>
+
+                        <Navigation.AccountFrame>
+                            <Navigation.TitleText>Account: ...{restProps.userState.account ? restProps.userState.account.slice(-10) : null}</Navigation.TitleText>
+                            <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
+                        </Navigation.AccountFrame>
                 </Navigation.NavInnerFrame>  
             </Navigation>
         </Header>

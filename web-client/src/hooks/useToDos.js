@@ -33,9 +33,7 @@ export default function useToDos(currentAccount){
                 while ( itterCount <= taskCount){
                     let task = await todoList.methods.tasks(itterCount).call()
                     
-                    // needs to check if the id is "0" before adding to the array
-                    // this is because in the EVM when a mapping is deleted it is set to "0"
-                    // The data is not completely removed from disk space
+                    
                     if (task.id !== "0"){
                         taskArr.push(task)
                     }
@@ -101,7 +99,7 @@ export default function useToDos(currentAccount){
             // use the event to create a new object to be pushed to the array
             const newData = {id: completedTaskVals.id, content: completedTaskVals.content,  completed: completedTaskVals.completed}
 
-            const indexOfItem = currentTaskArr.map(e => e.id).indexOf(newData.id);
+            const indexOfItem = currentTaskArr.map(task => task.id).indexOf(newData.id);
             currentTaskArr[indexOfItem] = newData
 
             setToDos({...todos, tasks: currentTaskArr})

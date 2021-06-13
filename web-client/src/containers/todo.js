@@ -30,7 +30,7 @@ export default function ToDoContainer(props){
                             <Todo.TaskItemFrame>
                                 <Todo.CheckBox type="checkbox" checked={todo.completed} onClick={()=>props.toggleCompletion(todo.id)}/>
                                 <Todo.Text>{index+1}.) {todo.content}</Todo.Text>
-                                <Todo.Text style={{color: "#fa314a", cursor: "pointer"}} onClick={()=>props.removeTask(todo.id)}>Remove</Todo.Text>
+                                <Todo.Text style={{color: "#CF6679", cursor: "pointer"}} onClick={()=>props.removeTask(todo.id)}>Remove</Todo.Text>
                             </Todo.TaskItemFrame>
                         </Todo.TaskFrame>
                  

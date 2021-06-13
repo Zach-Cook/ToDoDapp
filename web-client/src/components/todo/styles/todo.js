@@ -3,13 +3,15 @@ import styled from "styled-components";
 
 export const TodoFrame = styled.div`
 
-    width: 90%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid white;
+    justify-content: space-evenly;
     min-height: 80vh;
-
+    background: #383F44;
+    border-radius: 8px;
+    margin: 40px 0;
 `
 
 export const NewTaskFrame = styled.div`
@@ -18,7 +20,6 @@ export const NewTaskFrame = styled.div`
     display: flex;
     justify-content: space-evenly; 
     margin: 20px;
-
 `;
 
 export const Input = styled.input`

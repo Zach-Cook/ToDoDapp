@@ -35,4 +35,10 @@ contract ("TodoList", (accounts)=>{
         assert.equal(event.id.toNumber(), 1)
         assert.equal(event.completed, true)
       })
+
+    it('removes a task', async()=>{
+        const deletedTask = await this.todoList.removeTask(1)
+        const tasks = await this.todoList.tasks(1)
+        assert.equal(tasks.length, undefined)
+    })
 })

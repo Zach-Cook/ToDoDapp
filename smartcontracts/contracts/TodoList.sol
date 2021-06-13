@@ -50,6 +50,13 @@ contract TodoList {
 
     }
 
+    function removeTask(uint _id) public {
+
+
+        delete(tasks[_id]);
+
+    }
+
 
     // toggles completion of the task
     function toggleCompleted(uint _id) public {

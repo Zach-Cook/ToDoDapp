@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 export const TodoFrame = styled.div`
 
-    width: 80%;
+    width: 72%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     min-height: 80vh;
     background: #383F44;
     border-radius: 8px;
@@ -16,10 +16,11 @@ export const TodoFrame = styled.div`
 
 export const NewTaskFrame = styled.div`
 
-    width: 45%;
+    width: 100%;
     display: flex;
     justify-content: space-evenly; 
     margin: 20px;
+
 `;
 
 export const Input = styled.input`
@@ -47,9 +48,9 @@ export const Input = styled.input`
 export const Button = styled.button`
 
     cursor: pointer;
-    width: 25%;
+    width: 15%;
 
-    background: #6C8915;
+    background: #66AD47;
     font-size: 24px;
     font-style: normal;
     color: #FFFFFF;
@@ -63,18 +64,22 @@ export const Button = styled.button`
 
 export const TaskFrame = styled.div`
 
+
+
     width: 90%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin: 20px 0;
 `;
 
 export const TaskItemFrame = styled.div`
 
-    min-width: 65%;
+    min-width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+
+
 `;
 
 
@@ -89,6 +94,27 @@ export const Text = styled.p`
 
     font-size: 24px;
     color: #ffffff;
-    width: 40%;
-    text-align: center;
+    text-align: left;
+    width: 80%;
+    text-decoration: ${props => props.completed ? "line-through" : null};
+`;
+
+export const ContentFrame = styled.div`
+
+
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+
+`
+
+export const RemoveFrame = styled.div`
+
+    width: 30%;
+    display: flex;
+    justify-content: center;
+
+
 `;

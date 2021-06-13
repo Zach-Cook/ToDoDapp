@@ -10,6 +10,10 @@ export default function ToDoContainer(props){
     const [ newTodo, setNewTodo ] = useState("")
 
 
+    const removeStyles={
+        color: "#EF5354", cursor: "pointer", textAlign: "center"
+    }
+
 
     return (
 
@@ -28,9 +32,13 @@ export default function ToDoContainer(props){
                        
                         <Todo.TaskFrame key={todo.id}>
                             <Todo.TaskItemFrame>
-                                <Todo.CheckBox type="checkbox" checked={todo.completed} onClick={()=>props.toggleCompletion(todo.id)}/>
-                                <Todo.Text>{index+1}.) {todo.content}</Todo.Text>
-                                <Todo.Text style={{color: "#CF6679", cursor: "pointer"}} onClick={()=>props.removeTask(todo.id)}>Remove</Todo.Text>
+                                <Todo.ContentFrame>
+                                    <Todo.CheckBox type="checkbox" checked={todo.completed} onClick={()=>props.toggleCompletion(todo.id)}/>
+                                    <Todo.Text completed={todo.completed}>{index+1}.) {todo.content}</Todo.Text>
+                                </Todo.ContentFrame>
+                                <Todo.RemoveFrame>
+                                    <Todo.Text style={removeStyles} onClick={()=>props.removeTask(todo.id)}>Remove</Todo.Text>
+                                </Todo.RemoveFrame>
                             </Todo.TaskItemFrame>
                         </Todo.TaskFrame>
                  

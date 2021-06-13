@@ -1,5 +1,6 @@
 import React from 'react';
-import { TodoFrame, NewTaskFrame, Input,  Button, TaskFrame, TaskItemFrame, CheckBox, Text} from './styles/todo';
+import { TodoFrame, NewTaskFrame, Input,  Button, TaskFrame, 
+    TaskItemFrame, CheckBox, Text, RemoveFrame, ContentFrame} from './styles/todo';
 
 export default function Todo({children, ...restProps}){
 
@@ -35,4 +36,12 @@ Todo.CheckBox = function NavigationCheckBox({children, ...restProps}) {
 
 Todo.Text = function NavigationText({children, ...restProps}) {
     return <Text {...restProps}>{children}</Text>
+}
+
+Todo.ContentFrame = function NavigationContentFrame({children, ...restProps}) {
+    return <ContentFrame {...restProps}>{children}</ContentFrame>
+}
+
+Todo.RemoveFrame = function NavigationRemoveFrame({children, ...restProps}) {
+    return <RemoveFrame {...restProps}>{children}</RemoveFrame>
 }

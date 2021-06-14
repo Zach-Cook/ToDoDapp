@@ -12,8 +12,6 @@ export default async function getNetwork(todoListContract){
     let todoList;
     let chainName;
 
-    console.log('in here')
-    console.log(netID)
     switch (netID){
         case 1: //ETH
             chainName = "Ethereum Mainnet"
@@ -52,9 +50,6 @@ export default async function getNetwork(todoListContract){
             todoList = null
             break;
     }
-
-    console.log(todoList)
-    console.log(chainName)
     return { todoList, chainName}
 }
 

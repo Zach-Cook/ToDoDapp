@@ -144,13 +144,9 @@ export default function useToDos(currentAccount){
         try {
 
             const deletedTask = await todoList.methods.removeTask(id).send({from: userState.account})
-            const indexOfItem = currentTaskArr.map(e => e.id).indexOf(currentTaskArr.id);
-
-            console.log(indexOfItem)
-
+            const indexArray = currentTaskArr.map(e => e.id)
+            const indexOfItem = indexArray.indexOf(id.toString());
             currentTaskArr.splice(indexOfItem, 1)
-
-            console.log(currentTaskArr)
             setToDos({...todos, tasks: currentTaskArr})
 
         } catch (err){

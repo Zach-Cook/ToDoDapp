@@ -56,6 +56,8 @@ export default function useToDos(currentAccount){
             }
 
 
+            
+
             setToDos({tasks: taskArr, taskCount: taskCount})
         }   
 

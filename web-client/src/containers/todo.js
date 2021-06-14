@@ -36,7 +36,7 @@ export default function ToDoContainer(props){
                         <Todo.TaskFrame key={todo.id}>
                             <Todo.TaskItemFrame>
                                 <Todo.ContentFrame>
-                                    <Todo.CheckBox type="checkbox" checked={todo.completed} onClick={()=>props.toggleCompletion(todo.id)}/>
+                                    <Todo.CheckBox type="checkbox" checked={todo.completed} onClick={()=>props.toggleCompletion(todo.id)} onChange={()=> null}/>
                                     <Todo.Text completed={todo.completed}>{index+1}.) {todo.content}</Todo.Text>
                                 </Todo.ContentFrame>
                                 <Todo.RemoveFrame>

@@ -35,6 +35,11 @@ contract TodoList {
         bool completed
     );
 
+    event TaskDeleted(
+        uint id,
+        string content,
+        bool completed
+     );
 
 
     // creates a task
@@ -52,9 +57,11 @@ contract TodoList {
 
     function removeTask(uint _id) public {
 
+        Task memory _task = tasks[_id];
 
         delete(tasks[_id]);
 
+        emit TaskDeleted(_id, _task.content, _task.completed);
     }
 
 

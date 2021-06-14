@@ -40,5 +40,7 @@ contract ("TodoList", (accounts)=>{
         const deletedTask = await this.todoList.removeTask(1)
         const tasks = await this.todoList.tasks(1)
         assert.equal(tasks.length, undefined)
+        const event = deletedTask.logs[0].args
+        assert.equal(event.id.toNumber(), 1)
     })
 })

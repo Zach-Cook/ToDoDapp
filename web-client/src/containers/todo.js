@@ -4,15 +4,12 @@ import { Todo } from '../components';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-// custom hooks
-import useToDos from '../hooks/useToDos';
 
-
-export default function ToDoContainer(props){
+export default function ToDoContainer({ todos, createTask, toggleCompletion, removeTask, loading, errors } ){
 
     // holds the state of the new value
     const [ newTodo, setNewTodo ] = useState("")
-    const { todos, createTask, toggleCompletion, removeTask, loading } = useToDos()
+    
 
     const removeStyles={
         color: "#EF5354", cursor: "pointer", textAlign: "center"
@@ -21,6 +18,7 @@ export default function ToDoContainer(props){
     const spinnerStyles={
         margin: "250px", color: "white", height: "100px", width: "100px"
     }
+
 
     return (
 
@@ -34,7 +32,7 @@ export default function ToDoContainer(props){
                 </Todo.NewTaskFrame>
 
                 {
-                    todos.tasks && !loading?
+                    todos.tasks && !loading && !errors?
                     todos.tasks.map((todo, index)=>(
                        
                         <Todo.TaskFrame key={todo.id}>

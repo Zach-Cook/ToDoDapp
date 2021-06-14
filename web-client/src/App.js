@@ -8,11 +8,11 @@ import useLoadCurrentUser from './hooks/useLoadCurrentUser';
 
 function App() { 
 
-  const { userState, loadTheUser } = useLoadCurrentUser()
+  const { userState, loadTheUser, currentChainID } = useLoadCurrentUser()
 
   return (
     <>
-      <UserContext.Provider value={{userState, loadTheUser}}>
+      <UserContext.Provider value={{userState, loadTheUser, currentChainID}}>
         <GlobalStyle/>
         <Home/>
       </UserContext.Provider>

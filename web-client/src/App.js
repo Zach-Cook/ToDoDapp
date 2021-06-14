@@ -1,13 +1,21 @@
+import React from 'react'
 import Home from './pages/home'
 import GlobalStyle from './global-styles.js'
+import {UserContext} from './context/user';
 
+//hooks
+import useLoadCurrentUser from './hooks/useLoadCurrentUser';
 
+function App() { 
 
-function App() {
+  const { userState, loadTheUser } = useLoadCurrentUser()
+
   return (
     <>
-      <GlobalStyle/>
-      <Home/>
+      <UserContext.Provider value={{userState, loadTheUser}}>
+        <GlobalStyle/>
+        <Home/>
+      </UserContext.Provider>
     </>
   );
 }

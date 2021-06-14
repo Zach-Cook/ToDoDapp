@@ -4,11 +4,15 @@ import { Todo } from '../components';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+// custom hooks
+import useToDos from '../hooks/useToDos';
+
+
 export default function ToDoContainer(props){
 
     // holds the state of the new value
     const [ newTodo, setNewTodo ] = useState("")
-
+    const { todos, createTask, toggleCompletion, removeTask, loading } = useToDos()
 
     const removeStyles={
         color: "#EF5354", cursor: "pointer", textAlign: "center"
@@ -26,21 +30,21 @@ export default function ToDoContainer(props){
 
                 <Todo.NewTaskFrame>
                     <Todo.Input placeholder="Add a todo" onChange={(e)=> setNewTodo(e.target.value)}/>
-                    <Todo.Button onClick={(e)=> props.createTask(newTodo)} disabled={newTodo.length > 0 ? false : true}>Add</Todo.Button>
+                    <Todo.Button onClick={(e)=> createTask(newTodo)} disabled={newTodo.length > 0 ? false : true}>Add</Todo.Button>
                 </Todo.NewTaskFrame>
 
                 {
-                    props.todos.tasks ?
-                    props.todos.tasks.map((todo, index)=>(
+                    todos.tasks && !loading?
+                    todos.tasks.map((todo, index)=>(
                        
                         <Todo.TaskFrame key={todo.id}>
                             <Todo.TaskItemFrame>
                                 <Todo.ContentFrame>
-                                    <Todo.CheckBox type="checkbox" checked={todo.completed} onClick={()=>props.toggleCompletion(todo.id)} onChange={()=> null}/>
+                                    <Todo.CheckBox type="checkbox" checked={todo.completed} onClick={()=>toggleCompletion(todo.id)} onChange={()=> null}/>
                                     <Todo.Text completed={todo.completed}>{index+1}.) {todo.content}</Todo.Text>
                                 </Todo.ContentFrame>
                                 <Todo.RemoveFrame>
-                                    <Todo.Text style={removeStyles} onClick={()=>props.removeTask(todo.id)}>Remove</Todo.Text>
+                                    <Todo.Text style={removeStyles} onClick={()=>removeTask(todo.id)}>Remove</Todo.Text>
                                 </Todo.RemoveFrame>
                             </Todo.TaskItemFrame>
                         </Todo.TaskFrame>

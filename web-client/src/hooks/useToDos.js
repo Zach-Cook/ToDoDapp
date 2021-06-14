@@ -1,11 +1,18 @@
-import  { useEffect, useState} from 'react'
+import  { useEffect, useState, useContext} from 'react'
 import Web3 from 'web3';
+
+// context
+import { UserContext } from '../context/user';
 
 // contracts
 import todoListContract from '../contract-artifacts/TodoList.json'
 
 
 export default function useToDos(currentAccount){
+
+
+    const { userState } = useContext(UserContext)
+
 
     const [ todos, setToDos ] = useState({
         tasks: null,
@@ -16,6 +23,7 @@ export default function useToDos(currentAccount){
 
 
     useEffect(()=>{
+
         const web3 = new Web3(window.ethereum)
         async function getData(){
 
@@ -76,7 +84,7 @@ export default function useToDos(currentAccount){
         setLoading(true)
 
         try {
-            const createdTask = await todoList.methods.createTask(content).send({from: currentAccount})
+            const createdTask = await todoList.methods.createTask(content).send({from: userState.account})
 
             let currentTaskArr = [...todos.tasks]
 
@@ -98,7 +106,6 @@ export default function useToDos(currentAccount){
 
     // toggles the check mark on the completed
     async function toggleCompletion(id){
-        setLoading(true)
 
         const web3 = new Web3(window.ethereum)
         const netID = await web3.eth.net.getId()
@@ -106,7 +113,8 @@ export default function useToDos(currentAccount){
         let currentTaskArr = [...todos.tasks]
 
         try {
-            const completed = await todoList.methods.toggleCompleted(id).send({from: currentAccount})
+            
+            const completed = await todoList.methods.toggleCompleted(id).send({from: userState.account})
             // get the values from the smart contract event
             const completedTaskVals = completed.events.TaskCompleted.returnValues
             // use the event to create a new object to be pushed to the array
@@ -117,8 +125,9 @@ export default function useToDos(currentAccount){
 
             setToDos({...todos, tasks: currentTaskArr})
             // need to update client state
-
+            setLoading(false)
         } catch (err){
+            setLoading(false)
             console.log(err)
         }
 
@@ -134,9 +143,14 @@ export default function useToDos(currentAccount){
 
         try {
 
-            const deletedTask = await todoList.methods.removeTask(id).send({from: currentAccount})
+            const deletedTask = await todoList.methods.removeTask(id).send({from: userState.account})
             const indexOfItem = currentTaskArr.map(e => e.id).indexOf(currentTaskArr.id);
+
+            console.log(indexOfItem)
+
             currentTaskArr.splice(indexOfItem, 1)
+
+            console.log(currentTaskArr)
             setToDos({...todos, tasks: currentTaskArr})
 
         } catch (err){

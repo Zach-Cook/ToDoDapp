@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { Header, Navigation } from '../components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { UserContext } from '../context/user';
+
 
 export default function HeaderContainer({children, ...restProps}){
+
+    const { userState } = useContext(UserContext)
 
     return (
         
@@ -16,8 +20,15 @@ export default function HeaderContainer({children, ...restProps}){
                     <Navigation.Title>To Do Dapp</Navigation.Title>
 
                         <Navigation.AccountFrame>
-                            <Navigation.TitleText>Account: ...{restProps.userState.account ? restProps.userState.account.slice(-10) : null}</Navigation.TitleText>
-                            <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
+                            {
+                                userState ?
+                                <> 
+                                    <Navigation.TitleText>Account: ...{userState.account ? userState.account.slice(-10) : null}</Navigation.TitleText>
+                                    <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
+                                </>
+                                : 
+                                <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
+                            }
                         </Navigation.AccountFrame>
                 </Navigation.NavInnerFrame>  
             </Navigation>

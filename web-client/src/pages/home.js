@@ -1,36 +1,30 @@
-import React, { Fragment} from 'react';
+import React, { useContext, Fragment} from 'react';
 import HeaderContainer from '../containers/header';
 import MainContainer from '../containers/main';
 import FooterContainer from '../containers/footer';
 import TodoContainer from '../containers/todo';
+import UserContainer from '../containers/user';
 
-// custom hooks
-import useLoadCurrentUser from '../hooks/useLoadCurrentUser'
-import useToDos from '../hooks/useToDos';
+
+// context
+import { UserContext } from '../context/user';
 
 export default function Home(){
 
-    const { userState } = useLoadCurrentUser()
-    const { todos, setToDos, createTask, toggleCompletion, removeTask, loading } = useToDos(userState ? userState.account: null)
+    
+    const { userState, loadTheUser } = useContext(UserContext)
 
-    // console.log(todos.tasks ? todos.tasks.content : null)
-
-
-    console.log(todos)
     return (
         <Fragment>
-            <HeaderContainer userState={userState}/>
-
-            <MainContainer userState={userState}>
-                <TodoContainer 
-                    todos={todos} 
-                    setToDos={setToDos} 
-                    createTask={createTask}
-                    removeTask={removeTask}
-                    userState={userState}
-                    loading={loading}
-                    toggleCompletion={toggleCompletion}
-                />
+            <HeaderContainer/>
+            <MainContainer>
+                {
+                    userState ?
+                    <TodoContainer/>
+                    :
+                    <UserContainer loadTheUser={loadTheUser}/>
+                }
+                
             </MainContainer>
 
             <FooterContainer>

@@ -26,8 +26,11 @@ export default function HeaderContainer({children, ...restProps}){
                                     <Navigation.TitleText>Account: ...{userState.account ? userState.account.slice(-10) : null}</Navigation.TitleText>
                                     <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
                                 </>
-                                : 
-                                <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
+                                :
+                                <> 
+                                    <Navigation.TitleText>No Account Detected</Navigation.TitleText>
+                                    <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
+                                </>
                             }
                         </Navigation.AccountFrame>
                 </Navigation.NavInnerFrame>  

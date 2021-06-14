@@ -15,6 +15,9 @@ export const DarkContainer = styled.div`
 `
 
 export const LoginButton = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     width: 20%;
     height: 100px;

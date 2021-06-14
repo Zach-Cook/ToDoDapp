@@ -9,14 +9,17 @@ export default function ErrorContainer({currentNetwork, activeNetworks}){
         <Error>
             <Error.ErrorFrameInner>
                 <Error.ErrorText>
-                    Error: your are interacting on an unsupported network
-                    ({currentNetwork ? currentNetwork : null})
-                    Please switch to one of the active networks
+                    Error: You are currently interacting on an unsupported blockchain network,
+                    ({currentNetwork ? currentNetwork : null}).
+                    
                 </Error.ErrorText>
+                <Error.NetworkText>
+                    To use this Dapp, please switch to one of our active networks inside your MetaMask app:
+                </Error.NetworkText>
                 {
                     activeNetworks ?
                     activeNetworks.map((network, index) =>(
-                        <Error.NetworkText key={index}>{network}</Error.NetworkText>
+                        <Error.NetworkText key={index}>1.) {network}</Error.NetworkText>
                     ))
                     :
                     null

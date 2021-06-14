@@ -10,7 +10,6 @@ export default function useLoadCurrentUser(){
     // this gets the current chain id the user is operating with
     useEffect(()=>{
         window.ethereum.on('chainChanged', (_chainId) => {
-            console.log(parseInt(_chainId));
             setCurrentChainID(() => parseInt(_chainId))
           });
     })

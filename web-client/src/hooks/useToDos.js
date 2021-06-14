@@ -7,6 +7,8 @@ import { UserContext } from '../context/user';
 // contracts
 import todoListContract from '../contract-artifacts/TodoList.json'
 
+// helper
+import getNetwork from '../helper/getnework'
 
 export default function useToDos(){
 
@@ -27,46 +29,52 @@ export default function useToDos(){
     useEffect(()=>{
         setErrors(null)
         const web3 = new Web3(window.ethereum)
+
         async function getData(){
 
-            // get the network id
-            const netID = await web3.eth.net.getId()
-            console.log(netID)
-            // this handles the chain id
-            // currently if not on test net then this will cleanup the hook
-            let todoList;
-            let taskCount;
-            if (netID === 5777){
-                console.log('loading')
-                todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address) 
-                taskCount = await todoList.methods.taskCount().call()
-            } else {
-                console.log('not loading')
-                setLoading(false)
-                setErrors("Switch to the Ganache Chain")
-            }
+            // // get the network id
+            // const netID = await web3.eth.net.getId()
+            // // this handles the chain id
+            // // currently if not on test net then this will cleanup the hook
+            // let todoList;
+            // let taskCount;
+            // if (netID === 5777){
+            //     console.log('loading')
+            //     todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address)
+            //     taskCount = await todoList.methods.taskCount().call() 
+            // } else {
+            //     console.log('not loading')
+            //     setLoading(false)
+            //     setErrors("Switch to the Ganache Chain")
+            // }
 
+            const { todoList, chainName } = await getNetwork(todoListContract)
             
-            
-
-            // looping over the the itter count to get the mapping for the existing item
-            let taskArr = []
-            let itterCount = 1 
-            try {
-                while ( itterCount <= taskCount){
-                    let task = await todoList.methods.tasks(itterCount).call()
-                    if (task.id !== "0"){
-                        taskArr.push(task)
+            if (todoList){
+                let taskCount = await todoList.methods.taskCount().call()
+                // looping over the the itter count to get the mapping for the existing item
+                let taskArr = []
+                let itterCount = 1 
+                try {
+                    while ( itterCount <= taskCount){
+                        let task = await todoList.methods.tasks(itterCount).call()
+                        if (task.id !== "0"){
+                            taskArr.push(task)
+                        }
+                        itterCount++
                     }
-                    itterCount++
+                } catch (err){
+                    console.log(err)
                 }
-            } catch (err){
-                console.log(err)
+                setToDos({tasks: taskArr, taskCount: taskCount})
+                setLoading(false) 
+            } else {
+                setErrors(chainName)
             }
-            setToDos({tasks: taskArr, taskCount: taskCount})
-            setLoading(false)
+            
         }   
 
+        // if the user is logged in the get the data
         if(userState){
             getData()
         }
@@ -80,7 +88,7 @@ export default function useToDos(){
                 taskCount: null,
             })
         }
-
+    // anytime the chain id or the state of the user changes then re-run this component
     }, [currentChainID, userState])
 
     // this connects with the blockchain and creates the task

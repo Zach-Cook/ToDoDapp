@@ -14,12 +14,13 @@ import useToDos from '../hooks/useToDos';
 
 export default function Home(){
 
+    const activeNetworks = process.env.REACT_APP_ACTIVE_NETWORKS.split(",");
     const { todos, createTask, toggleCompletion, removeTask, loading, errors } = useToDos()
     const { userState, loadTheUser } = useContext(UserContext)
 
-    console.log(todos)
-    console.log(userState)
+
     console.log(errors)
+
     return (
         <Fragment>
             <HeaderContainer/>
@@ -35,7 +36,10 @@ export default function Home(){
                     />
                     :
                     errors ?
-                    <ErrorContainer currentNetwork={errors.currentNetwork} activeNetworks={errors.activeNetworks}/>
+                    <ErrorContainer 
+                        currentNetwork={errors} 
+                        activeNetworks={activeNetworks}
+                    />
                     :
                     <UserContainer loadTheUser={loadTheUser}/>
                 }

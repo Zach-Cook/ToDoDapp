@@ -6,53 +6,36 @@ contract TodoList {
 
     // state variables written to blockchain
     uint public taskCount = 0;
-
+    uint public userCount = 0;
 
     // Task Data Type
     struct Task {
         uint id;
         string content;
         bool completed;
-        address user;
     }
 
     // // Data type for storing the users task
-    // struct UserTask {
-    //     uint id;
-    //     address user; 
-    //     Task [] tasks;
-    // }
+    struct User {
+        address userAddress; // this will act as a foreign key 
+        uint id;
+        Task[] tasksArray;
+    }
 
-    // struct User {
-
-    // }
-
+    // keep mapping of users
+    mapping(address => User) public users;
     // data structures for holding the tasks
     // using mapping
     mapping(uint => Task) public tasks;
+    
 
-
-    // using array
-    Task[] public tasksArray; 
 
     // this is an ethereum event for clients
-    event TaskCreated(
+    event TaskEvent(
         uint id,
         string content,
         bool completed
     );
-
-    event TaskCompleted(
-        uint id,
-        string content,
-        bool completed
-    );
-
-    event TaskDeleted(
-        uint id,
-        string content,
-        bool completed
-     );
 
 
     // creates a task
@@ -60,11 +43,21 @@ contract TodoList {
 
         taskCount ++;
         // adding to the mapping
-        tasks[taskCount] = Task(taskCount, _content, false, msg.sender); 
-        // adding to the array
-        tasksArray.push(Task(taskCount, _content, false, msg.sender));
+        tasks[taskCount] = Task(taskCount, _content, false); 
 
-        emit TaskCreated(taskCount, _content, false);
+        // if in the users mapping the address is equal to the sender
+        // this basically means the user has posted a before
+        // if (users[msg.sender].userAddress == msg.sender){
+        //     users[msg.sender].tasksArray.push(Task(taskCount, _content, false));
+        // } else {
+             
+        //     userCount ++;
+        //     // Task[] taskArr = [];
+        //     User(msg.sender, userCount, Task(taskCount, _content, false));
+        // }
+        
+
+        emit TaskEvent(taskCount, _content, false);
 
     }
 
@@ -74,7 +67,7 @@ contract TodoList {
 
         delete(tasks[_id]);
 
-        emit TaskDeleted(_id, _task.content, _task.completed);
+        emit TaskEvent(_id, _task.content, _task.completed);
     }
 
 
@@ -86,15 +79,9 @@ contract TodoList {
         _task.completed = !_task.completed;
         tasks[_id] = _task;
 
-        emit TaskCompleted(_id, _task.content, _task.completed);
+        emit TaskEvent(_id, _task.content, _task.completed);
     }
-
-    // returns an array of all of the tasks
-    function getTasksArray() public view returns(Task[] memory){
-        return tasksArray;
-    }
-
-    
+ 
     constructor() {
 
         // Create a base task on creation of the contract

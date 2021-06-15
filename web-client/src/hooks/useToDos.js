@@ -84,7 +84,7 @@ export default function useToDos(){
                 let currentTaskArr = [...todos.tasks]
 
                 // get the values from the smart contract event
-                const createdTaskVals = createdTask.events.TaskCreated.returnValues
+                const createdTaskVals = createdTask.events.TaskEvent.returnValues
                 // use the event to create a new object to be pushed to the array
                 const newData = {id: createdTaskVals.id, content: createdTaskVals.content,  completed: createdTaskVals.completed}
                 currentTaskArr.push(newData)
@@ -115,7 +115,7 @@ export default function useToDos(){
                 
                 const completed = await todoList.methods.toggleCompleted(id).send({from: userState.account})
                 // get the values from the smart contract event
-                const completedTaskVals = completed.events.TaskCompleted.returnValues
+                const completedTaskVals = completed.events.TaskEvent.returnValues
                 // use the event to create a new object to be pushed to the array
                 const newData = {id: completedTaskVals.id, content: completedTaskVals.content,  completed: completedTaskVals.completed}
 

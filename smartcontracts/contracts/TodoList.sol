@@ -16,9 +16,22 @@ contract TodoList {
         address user;
     }
 
+    // // Data type for storing the users task
+    // struct UserTask {
+    //     uint id;
+    //     address user; 
+    //     Task [] tasks;
+    // }
+
+    // struct User {
+
+    // }
+
     // data structures for holding the tasks
     // using mapping
     mapping(uint => Task) public tasks;
+
+
     // using array
     Task[] public tasksArray; 
 

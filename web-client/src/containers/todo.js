@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Todo } from '../components';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
-export default function ToDoContainer({ todos, createTask, toggleCompletion, removeTask, loading, errors } ){
+export default function ToDoContainer({ todos, createTask, toggleCompletion, removeTask, loading, errors, newTodo, setNewTodo } ){
 
-    // holds the state of the new value
-    const [ newTodo, setNewTodo ] = useState("")
     
 
     const removeStyles={
@@ -27,7 +25,7 @@ export default function ToDoContainer({ todos, createTask, toggleCompletion, rem
             <Todo>
 
                 <Todo.NewTaskFrame>
-                    <Todo.Input placeholder="Add a todo" onChange={(e)=> setNewTodo(e.target.value)}/>
+                    <Todo.Input placeholder="Add a todo" onChange={(e)=> setNewTodo(e.target.value)} value={newTodo}/>
                     <Todo.Button onClick={(e)=> createTask(newTodo)} disabled={newTodo.length > 0 ? false : true}>Add</Todo.Button>
                 </Todo.NewTaskFrame>
 

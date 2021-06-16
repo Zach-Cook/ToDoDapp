@@ -15,7 +15,7 @@ import useToDos from '../hooks/useToDos';
 export default function Home(){
 
     const activeNetworks = process.env.REACT_APP_ACTIVE_NETWORKS.split(",");
-    const { todos, createTask, toggleCompletion, removeTask, loading, errors } = useToDos()
+    const { todos, createTask, toggleCompletion, removeTask, loading, errors, newTodo, setNewTodo } = useToDos()
     const { userState, loadTheUser } = useContext(UserContext)
 
     return (
@@ -30,6 +30,8 @@ export default function Home(){
                         toggleCompletion={toggleCompletion}
                         removeTask={removeTask}
                         loading={loading}
+                        setNewTodo={setNewTodo}
+                        newTodo={newTodo}
                     />
                     :
                     errors ?

@@ -19,6 +19,8 @@ export default function useToDos(){
         tasks: null,
         taskCount: null,
     })
+    // holds the state of the new value
+    const [ newTodo, setNewTodo ] = useState("")
 
     const [ loading, setLoading ] = useState(false)
     const [ errors, setErrors ] = useState()
@@ -67,6 +69,7 @@ export default function useToDos(){
                 tasks: [],
                 taskCount: null,
             })
+            setNewTodo("")
         }
     // anytime the chain id or the state of the user changes then re-run this component
     }, [currentChainID, userState])
@@ -91,6 +94,7 @@ export default function useToDos(){
                 // set the state
                 setToDos({tasks: currentTaskArr, taskCount: (todos.taskCount + 1)})
                 setLoading(false)
+                setNewTodo("")
             } catch (err){
                 console.log(err)
                 setLoading(false)
@@ -164,6 +168,6 @@ export default function useToDos(){
     }
 
 
-    return { todos, setToDos, createTask, removeTask, toggleCompletion, loading, errors}
+    return { todos, setToDos, createTask, removeTask, toggleCompletion, loading, errors, newTodo, setNewTodo}
 
 }

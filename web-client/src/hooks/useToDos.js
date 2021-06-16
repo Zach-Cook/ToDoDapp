@@ -29,21 +29,19 @@ export default function useToDos(){
         setErrors(null)
         async function getData(){
             const { todoList, chainName } = await getNetwork(todoListContract)
-            
-            console.log(await todoList.methods.getUserTasks().call())
 
             if (todoList){
                 let taskCount = await todoList.methods.taskCount().call()
+                // getting the users to do list ids and then making calls based off of that
+                const usersTodolistIds = await todoList.methods.getUserTasks().call({from: userState.account})
                 // looping over the the itter count to get the mapping for the existing item
                 let taskArr = []
-                let itterCount = 1 
                 try {
-                    while ( itterCount <= taskCount){
-                        let task = await todoList.methods.tasks(itterCount).call()
+                    for (let i = 0; i<usersTodolistIds.length; i++){
+                        let task = await todoList.methods.tasks(usersTodolistIds[i]).call()
                         if (task.id !== "0"){
                             taskArr.push(task)
                         }
-                        itterCount++
                     }
                 } catch (err){
                     console.log(err)

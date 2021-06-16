@@ -49,6 +49,10 @@ contract ("TodoList", (accounts)=>{
         assert.equal(user.id.toNumber(), userCount.toNumber())
     })
 
+    // it('lists current logged in user tasks', async ()=>{
+
+    // })
+
     it('toggles task completion', async () => {
         const result = await this.todoList.toggleCompleted(1)
         const task = await this.todoList.tasks(1)

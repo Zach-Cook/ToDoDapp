@@ -33,7 +33,6 @@ export default function useLoadCurrentUser(){
         if(typeof window.ethereum !== "undefined"){
             const netID = await web3.eth.net.getId()
             const accounts = await web3.eth.requestAccounts()
-            console.log(accounts)
             let etherBalance = await web3.eth.getBalance(accounts[0])
             etherBalance = web3.utils.fromWei(etherBalance)
 

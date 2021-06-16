@@ -29,12 +29,8 @@ contract TodoList {
         bool exists;
         uint[] taskIds;
     }
+
     mapping(address => User) public users;
-
-    
-
-
-
 
     // creates a task
     function createTask(string memory _content) public {
@@ -56,7 +52,6 @@ contract TodoList {
             users[msg.sender].taskIds.push(taskCount);
         }
         
-
         emit TaskEvent(taskCount, _content, false);
 
     }
@@ -90,7 +85,6 @@ contract TodoList {
     }
  
     constructor() {
-
         // Create a base task on creation of the contract
         createTask("Check out Zachcook.io");
     }

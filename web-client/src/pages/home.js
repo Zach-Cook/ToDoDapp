@@ -18,9 +18,6 @@ export default function Home(){
     const { todos, createTask, toggleCompletion, removeTask, loading, errors } = useToDos()
     const { userState, loadTheUser } = useContext(UserContext)
 
-
-    console.log(errors)
-
     return (
         <Fragment>
             <HeaderContainer/>

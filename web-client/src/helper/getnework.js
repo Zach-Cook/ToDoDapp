@@ -41,7 +41,6 @@ export default async function getNetwork(todoListContract){
             chainName = "Polygon Network"
             break;
         case 5777: //Ganache
-            console.log('in here?')
             chainName = "Ganache"
             todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address)
             break;

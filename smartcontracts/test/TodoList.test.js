@@ -44,6 +44,8 @@ contract ("TodoList", (accounts)=>{
     it('checks user', async ()=>{
         const user = await this.todoList.users(this.testAccount)
         const userCount = await this.todoList.userCount()
+        const userArray = user.taskIds
+        console.log(userArray)
         assert.equal(user.id.toNumber(), userCount.toNumber())
     })
 

@@ -30,6 +30,8 @@ export default function useToDos(){
         async function getData(){
             const { todoList, chainName } = await getNetwork(todoListContract)
             
+            console.log(await todoList.methods.getUserTasks().call())
+
             if (todoList){
                 let taskCount = await todoList.methods.taskCount().call()
                 // looping over the the itter count to get the mapping for the existing item

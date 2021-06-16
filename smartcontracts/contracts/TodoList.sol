@@ -47,16 +47,12 @@ contract TodoList {
 
         // if in the users mapping the address is equal to the sender
         // this basically means the user has posted a task before
-        if (users[msg.sender].exists == true){
+        if (users[msg.sender].exists == true){ 
             users[msg.sender].taskIds.push(taskCount);
         } else {
             userCount ++;
-
-            User memory user;
-            user.id = userCount;
-            user.userAddress = msg.sender;
-            user.exists = true;
-            users[msg.sender] = user;
+            uint [] memory taskIDArray;
+            users[msg.sender] = User(taskCount, msg.sender, true, taskIDArray);
             users[msg.sender].taskIds.push(taskCount);
         }
         
@@ -84,6 +80,13 @@ contract TodoList {
         tasks[_id] = _task;
 
         emit TaskEvent(_id, _task.content, _task.completed);
+    }
+
+    // this will get all of the ids the user has posted
+    // it acts as a kind of filter to prevent to much load on the client side
+    function getUserTasks() public view returns(uint [] memory) {
+        User memory user = users[msg.sender];
+        return user.taskIds;
     }
  
     constructor() {

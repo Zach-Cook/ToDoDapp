@@ -9,9 +9,17 @@ export default function useLoadCurrentUser(){
 
     // this gets the current chain id the user is operating with
     useEffect(()=>{
+
         window.ethereum.on('chainChanged', (_chainId) => {
             setCurrentChainID(() => parseInt(_chainId))
           });
+        
+        // when the account changes reload the user account
+        window.ethereum.on('accountsChanged', (account)=>{
+            loadTheUser()
+        })
+
+        
     })
 
 
@@ -20,10 +28,12 @@ export default function useLoadCurrentUser(){
     async function loadTheUser() {
 
         const web3 = new Web3(window.ethereum)
+
         //check if MetaMask exists
         if(typeof window.ethereum !== "undefined"){
             const netID = await web3.eth.net.getId()
             const accounts = await web3.eth.requestAccounts()
+            console.log(accounts)
             let etherBalance = await web3.eth.getBalance(accounts[0])
             etherBalance = web3.utils.fromWei(etherBalance)
 

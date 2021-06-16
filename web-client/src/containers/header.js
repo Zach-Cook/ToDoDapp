@@ -24,6 +24,7 @@ export default function HeaderContainer({children, ...restProps}){
                                 userState ?
                                 <> 
                                     <Navigation.TitleText>Account: ...{userState.account ? userState.account.slice(-10) : null}</Navigation.TitleText>
+                                    <Navigation.TitleText>This site is hosted on IPFS!</Navigation.TitleText>
                                     <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
                                 </>
                                 :

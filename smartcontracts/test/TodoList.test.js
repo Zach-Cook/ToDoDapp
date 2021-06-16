@@ -4,8 +4,12 @@ const TodoList = artifacts.require("ToDoList.sol")
 
 contract ("TodoList", (accounts)=>{
 
+    
+
     before(async () =>{
         this.todoList = await TodoList.deployed()
+        this.deployer = accounts[0]
+        this.testAccount = accounts[1]
     })
 
     it('deploys successfully', async () =>{
@@ -15,6 +19,8 @@ contract ("TodoList", (accounts)=>{
         assert.notEqual(address, null)
         assert.notEqual(address, undefined)
     })
+
+    
 
     it('lists tasks', async ()=> {
         const taskCount = await this.todoList.taskCount()
@@ -26,6 +32,20 @@ contract ("TodoList", (accounts)=>{
 
     })
 
+    it('creates task with different user', async ()=>{
+        await this.todoList.createTask('Testing task', {from: this.testAccount})
+        const taskCount = await this.todoList.taskCount()
+        const createdTask= await this.todoList.tasks(taskCount)
+        assert.equal(createdTask.id.toNumber(), taskCount.toNumber())
+        assert.equal(taskCount.toNumber(), 2)
+        assert.equal(createdTask.content,"Testing task")
+    })
+
+    it('checks user', async ()=>{
+        const user = await this.todoList.users(this.testAccount)
+        const userCount = await this.todoList.userCount()
+        assert.equal(user.id.toNumber(), userCount.toNumber())
+    })
 
     it('toggles task completion', async () => {
         const result = await this.todoList.toggleCompleted(1)

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.4;
+pragma solidity 0.8.5;
 
 
 contract TodoList {
@@ -14,22 +14,7 @@ contract TodoList {
         string content;
         bool completed;
     }
-
-    // // Data type for storing the users task
-    struct User {
-        address userAddress; // this will act as a foreign key 
-        uint id;
-        Task[] tasksArray;
-    }
-
-    // keep mapping of users
-    mapping(address => User) public users;
-    // data structures for holding the tasks
-    // using mapping
     mapping(uint => Task) public tasks;
-    
-
-
     // this is an ethereum event for clients
     event TaskEvent(
         uint id,
@@ -37,24 +22,43 @@ contract TodoList {
         bool completed
     );
 
+    // // Data type for storing the users task
+    struct User {
+        uint id;
+        address userAddress; // this will act as a foreign key 
+        bool exists;
+        uint[] taskIds;
+    }
+    mapping(address => User) public users;
+
+    
+
+
+
 
     // creates a task
     function createTask(string memory _content) public {
 
+        // increment the taskCount which is used as the id for each task
         taskCount ++;
-        // adding to the mapping
+
+        // add the task to the tasks
         tasks[taskCount] = Task(taskCount, _content, false); 
 
         // if in the users mapping the address is equal to the sender
-        // this basically means the user has posted a before
-        // if (users[msg.sender].userAddress == msg.sender){
-        //     users[msg.sender].tasksArray.push(Task(taskCount, _content, false));
-        // } else {
-             
-        //     userCount ++;
-        //     // Task[] taskArr = [];
-        //     User(msg.sender, userCount, Task(taskCount, _content, false));
-        // }
+        // this basically means the user has posted a task before
+        if (users[msg.sender].exists == true){
+            users[msg.sender].taskIds.push(taskCount);
+        } else {
+            userCount ++;
+
+            User memory user;
+            user.id = userCount;
+            user.userAddress = msg.sender;
+            user.exists = true;
+            users[msg.sender] = user;
+            users[msg.sender].taskIds.push(taskCount);
+        }
         
 
         emit TaskEvent(taskCount, _content, false);

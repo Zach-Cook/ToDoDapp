@@ -21,8 +21,7 @@ export default function ToDoContainer({ todos, createTask, toggleCompletion, rem
 
         <>
 
-            <Todo>
-
+            <Todo >
                 <Todo.NewTaskFrame>
                     <Todo.Input placeholder="Add a todo" onChange={(e)=> setNewTodo(e.target.value)} value={newTodo}/>
                     <Todo.Button onClick={(e)=> createTask(newTodo)} disabled={newTodo.length > 0 ? false : true}>Add</Todo.Button>

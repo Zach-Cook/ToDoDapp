@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const ErrorFrame = styled.div`
 
-    width: 72%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,6 +12,10 @@ export const ErrorFrame = styled.div`
     background: #383F44;
     border-radius: 8px;
     margin: 40px 0;
+
+    @media screen and (min-width: 600px){
+        width: 72%;
+    }
 `
 
 export const ErrorFrameInner = styled.div`

@@ -11,7 +11,7 @@ export const TodoFrame = styled.div`
     background: #383F44;
     border-radius: 8px;
     margin: 40px 0;
-
+    
     @media screen and (min-width: 600px){
         width: 72%;
         justify-content: flex-start;
@@ -20,7 +20,7 @@ export const TodoFrame = styled.div`
 
 export const NewTaskFrame = styled.div`
 
-    width: 100%;
+    width: 100%;    
     display: flex;
     flex-direction: column;
     align-items: center;

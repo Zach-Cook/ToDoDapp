@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const DarkContainer = styled.div`
 
-    width: 72%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,6 +12,10 @@ export const DarkContainer = styled.div`
     background: #383F44;
     border-radius: 8px;
     margin: 40px 0;
+
+    @media screen and (min-width: 600px){
+        width: 72%;
+    }
 `
 
 export const LoginButton = styled.button`
@@ -19,7 +23,7 @@ export const LoginButton = styled.button`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 20%;
+    width: 90%;
     height: 100px;
     background: #66AD47;
     font-size: 24px;
@@ -31,4 +35,8 @@ export const LoginButton = styled.button`
     text-align: center;
     border: none;
     cursor: pointer;
+
+    @media screen and (min-width: 600px){
+        width: 20%;
+    }
 `;

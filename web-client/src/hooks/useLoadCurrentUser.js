@@ -10,12 +10,13 @@ export default function useLoadCurrentUser(){
     // this gets the current chain id the user is operating with
     useEffect(()=>{
 
+        // when the network chain changes
         window.ethereum.on('chainChanged', (_chainId) => {
             setCurrentChainID(() => parseInt(_chainId))
           });
         
         // when the account changes reload the user account
-        window.ethereum.on('accountsChanged', (account)=>{
+        window.ethereum.on('accountsChanged', ()=>{
             loadTheUser()
         })
 

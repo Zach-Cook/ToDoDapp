@@ -13,12 +13,14 @@ export default function useToDos(){
 
 
     const { userState, currentChainID } = useContext(UserContext)
-
+    
 
     const [ todos, setToDos ] = useState({
-        tasks: null,
+        tasks: [],
         taskCount: null,
     })
+
+
     // holds the state of the new value
     const [ newTodo, setNewTodo ] = useState("")
 
@@ -48,6 +50,7 @@ export default function useToDos(){
                 } catch (err){
                     console.log(err)
                 }
+
                 setToDos({tasks: taskArr, taskCount: taskCount})
                 setLoading(false) 
             } else {

@@ -23,7 +23,10 @@ export const AccountFrame = styled.div`
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 35%;
+
+    border: 2px solid green;
 
     @media screen and (min-width: 1920px){
         width: 20%;
@@ -35,13 +38,29 @@ export const AccountFrame = styled.div`
 export const Title = styled.h1`
 
     color: #FFFFFF;
-    font-size: 42px;
+    font-size: 28px;
     font-weight: normal;
+
+    @media screen and (min-width: 800px){
+        font-size: 42px;
+    }
 `
 
 export const TitleText = styled.p`
 
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: normal;
+
+    @media screen and (min-width: 800px){
+        font-size: 18px;
+    }
 `
+
+export const IconDiv = styled.div`
+
+    height: 40px;
+    width: 40px;
+    border: 2px solid pink;
+
+`;

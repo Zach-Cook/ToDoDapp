@@ -19,21 +19,25 @@ export default function HeaderContainer({children, ...restProps}){
                     
                     <Navigation.Title>To Do Dapp</Navigation.Title>
 
-                        <Navigation.AccountFrame>
-                            {
-                                userState ?
-                                <> 
-                                    <Navigation.TitleText>Account: ...{userState.account ? userState.account.slice(-10) : null}</Navigation.TitleText>
-                                    <Navigation.TitleText>This site is hosted on IPFS!</Navigation.TitleText>
-                                    <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
-                                </>
-                                :
-                                <> 
-                                    <Navigation.TitleText>No Account Detected</Navigation.TitleText>
-                                    <FontAwesomeIcon icon={faUser} color="white" style={{height: "40px", width: "40px", cursor: "pointer"}}/>
-                                </>
-                            }
-                        </Navigation.AccountFrame>
+                    <Navigation.AccountFrame>
+                        {
+                            userState ?
+                            <> 
+                                <Navigation.TitleText>Account: ...{userState.account ? userState.account.slice(-10) : null}</Navigation.TitleText>
+                                <Navigation.IconDiv>
+                                    <FontAwesomeIcon icon={faUser} color="white" style={{ width: "100%", height: "40px", cursor: "pointer"}}/>
+                                </Navigation.IconDiv>
+                            </>
+                            :
+                            <> 
+                                <Navigation.TitleText>No Account Detected</Navigation.TitleText>
+                                <Navigation.IconDiv>
+                                    <FontAwesomeIcon icon={faUser} color="white" style={{width: "100%", height: "40px", cursor: "pointer"}}/>
+                                </Navigation.IconDiv>
+                                
+                            </>
+                        }
+                    </Navigation.AccountFrame>
                 </Navigation.NavInnerFrame>  
             </Navigation>
         </Header>

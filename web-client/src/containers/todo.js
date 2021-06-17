@@ -37,9 +37,6 @@ export default function ToDoContainer({ todos, createTask, toggleCompletion, rem
                                 <Todo.ContentFrame>
                                     <Todo.CheckBox type="checkbox" checked={todo.completed} onClick={()=>toggleCompletion(todo.id)} onChange={()=> null}/>
                                     <Todo.Text completed={todo.completed}>{`${index+1}.) ${todo.content}`}</Todo.Text>
-
-                                    
-
                                 </Todo.ContentFrame>
                                 <Todo.RemoveFrame>
                                     <Todo.Text style={removeStyles} onClick={()=>removeTask(todo.id)}>Remove</Todo.Text>

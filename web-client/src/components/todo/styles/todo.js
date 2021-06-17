@@ -12,7 +12,7 @@ export const TodoFrame = styled.div`
     border-radius: 8px;
     margin: 40px 0;
 
-    @media screen and (min-width: 750px){
+    @media screen and (min-width: 600px){
         width: 72%;
         justify-content: flex-start;
     }
@@ -26,7 +26,7 @@ export const NewTaskFrame = styled.div`
     align-items: center;
     justify-content: space-evenly; 
 
-    @media screen and (min-width: 750px){
+    @media screen and (min-width: 600px){
         margin: 20px;
         align-items: stretch;
         flex-direction: row;
@@ -56,7 +56,7 @@ export const Input = styled.input`
         
     }
 
-    @media screen and (min-width: 750px){
+    @media screen and (min-width: 600px){
         width: 65%;
         padding-left: 1.2rem;
 
@@ -85,7 +85,7 @@ export const Button = styled.button`
     margin: 20px 0;
     height: 60px;
 
-    @media screen and (min-width: 750px){
+    @media screen and (min-width: 600px){
         margin: 0;
         width: 15%;
     }
@@ -117,7 +117,7 @@ export const CheckBox = styled.input`
     width:  12px;
     cursor: pointer;
 
-    @media screen and (min-width: 750px){
+    @media screen and (min-width: 600px){
         height: 20px;
     width:  20px;
     }
@@ -131,7 +131,7 @@ export const Text = styled.p`
     width: 80%;
     text-decoration: ${props => props.completed ? "line-through" : null};
 
-    @media screen and (min-width: 750px){
+    @media screen and (min-width: 600px){
         font-size: 24px;
     }
 

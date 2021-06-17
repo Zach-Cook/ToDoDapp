@@ -22,11 +22,15 @@ export const NavInnerFrame = styled.div`
 export const AccountFrame = styled.div`
 
     display: flex;
-    justify-content: space-between;
+    justify-content: ${props => props.justifyContent ? props.justifyContent : "space-between"};
     align-items: center;
-    width: 35%;
+    width: 60%;
 
-    border: 2px solid green;
+    
+
+    @media screen and (min-width: 600px){
+        width: 35%;
+    }
 
     @media screen and (min-width: 1920px){
         width: 20%;
@@ -38,12 +42,14 @@ export const AccountFrame = styled.div`
 export const Title = styled.h1`
 
     color: #FFFFFF;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: normal;
 
-    @media screen and (min-width: 800px){
+
+    @media screen and (min-width: 600px){
         font-size: 42px;
     }
+
 `
 
 export const TitleText = styled.p`
@@ -52,7 +58,7 @@ export const TitleText = styled.p`
     font-size: 14px;
     font-weight: normal;
 
-    @media screen and (min-width: 800px){
+    @media screen and (min-width: 600px){
         font-size: 18px;
     }
 `
@@ -61,6 +67,5 @@ export const IconDiv = styled.div`
 
     height: 40px;
     width: 40px;
-    border: 2px solid pink;
 
 `;

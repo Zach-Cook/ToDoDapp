@@ -12,9 +12,6 @@ import { UserContext } from '../context/user';
 // custom hook
 import useToDos from '../hooks/useToDos';
 
-// contract artifact
-import TodoListContract from '../contract-artifacts/TodoList.json';
-
 
 
 

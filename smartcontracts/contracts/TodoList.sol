@@ -11,6 +11,7 @@ contract TodoList {
     // Task Data Type
     struct Task {
         uint id;
+        uint date;
         string content;
         bool completed;
     }
@@ -18,6 +19,7 @@ contract TodoList {
     // this is an ethereum event for clients
     event TaskEvent(
         uint id,
+        uint date,
         string content,
         bool completed
     );
@@ -33,13 +35,13 @@ contract TodoList {
     mapping(address => User) public users;
 
     // creates a task
-    function createTask(string memory _content) public {
+    function createTask( uint _date, string memory _content) public {
 
         // increment the taskCount which is used as the id for each task
         taskCount ++;
 
         // add the task to the tasks
-        tasks[taskCount] = Task(taskCount, _content, false); 
+        tasks[taskCount] = Task(taskCount, _date, _content, false); 
 
         // if in the users mapping the address is equal to the sender
         // this basically means the user has posted a task before
@@ -52,7 +54,7 @@ contract TodoList {
             users[msg.sender].taskIds.push(taskCount);
         }
         
-        emit TaskEvent(taskCount, _content, false);
+        emit TaskEvent(taskCount, _date, _content, false);
 
     }
 
@@ -62,7 +64,7 @@ contract TodoList {
 
         delete(tasks[_id]);
 
-        emit TaskEvent(_id, _task.content, _task.completed);
+        emit TaskEvent(_id, _task.date, _task.content, _task.completed);
     }
 
 
@@ -74,7 +76,7 @@ contract TodoList {
         _task.completed = !_task.completed;
         tasks[_id] = _task;
 
-        emit TaskEvent(_id, _task.content, _task.completed);
+        emit TaskEvent(_id, _task.date, _task.content, _task.completed);
     }
 
     // this will get all of the ids the user has posted
@@ -86,7 +88,7 @@ contract TodoList {
  
     constructor() {
         // Create a base task on creation of the contract
-        createTask("Check out Zachcook.io");
+        createTask(1634034138, "Check out Zachcook.io");
     }
 
 }

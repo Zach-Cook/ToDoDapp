@@ -22,6 +22,9 @@ export default function Home(){
     const { userState, loadTheUser } = useContext(UserContext)
     const [ deployedNetworks ] = useDeployedNetWorks(todoListContract)
 
+
+    console.log(todos)
+
     return (
         <Fragment>
             <HeaderContainer/>

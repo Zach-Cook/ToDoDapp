@@ -20,7 +20,6 @@ contract ("TodoList", (accounts)=>{
         assert.notEqual(address, undefined)
     })
 
-    
 
     it('lists tasks', async ()=> {
         const taskCount = await this.todoList.taskCount()
@@ -29,15 +28,15 @@ contract ("TodoList", (accounts)=>{
         assert.equal(task.content, "Check out Zachcook.io")
         assert.equal(task.completed, false)
         assert.equal(taskCount.toNumber(), 1)
-
     })
 
     it('creates task with different user', async ()=>{
-        await this.todoList.createTask('Testing task', {from: this.testAccount})
+        await this.todoList.createTask(1634034138, 'Testing task', {from: this.testAccount})
         const taskCount = await this.todoList.taskCount()
         const createdTask= await this.todoList.tasks(taskCount)
         assert.equal(createdTask.id.toNumber(), taskCount.toNumber())
         assert.equal(taskCount.toNumber(), 2)
+        assert.equal(createdTask.date.toString().length, 10)
         assert.equal(createdTask.content,"Testing task")
     })
 
@@ -45,7 +44,6 @@ contract ("TodoList", (accounts)=>{
         const user = await this.todoList.users(this.testAccount)
         const userCount = await this.todoList.userCount()
         const userArray = user.taskIds
-        console.log(userArray)
         assert.equal(user.id.toNumber(), userCount.toNumber())
     })
 

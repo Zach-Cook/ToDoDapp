@@ -81,18 +81,19 @@ export default function useToDos(){
     async function createTask(content){
 
         const { contract, chainName } = await getNetwork(todoListContract)
-
+        const timestamp = Date.now()
         if (contract){
             setLoading(true)
             try {
-                const createdTask = await contract.methods.createTask(content).send({from: userState.account})
+                
+                const createdTask = await contract.methods.createTask(timestamp, content).send({from: userState.account})
 
                 let currentTaskArr = [...todos.tasks]
 
                 // get the values from the smart contract event
                 const createdTaskVals = createdTask.events.TaskEvent.returnValues
                 // use the event to create a new object to be pushed to the array
-                const newData = {id: createdTaskVals.id, content: createdTaskVals.content,  completed: createdTaskVals.completed}
+                const newData = {id: createdTaskVals.id, date: createdTaskVals.date, content: createdTaskVals.content,  completed: createdTaskVals.completed}
                 currentTaskArr.push(newData)
                 // set the state
                 setToDos({tasks: currentTaskArr, taskCount: (todos.taskCount + 1)})
@@ -124,7 +125,7 @@ export default function useToDos(){
                 // get the values from the smart contract event
                 const completedTaskVals = completed.events.TaskEvent.returnValues
                 // use the event to create a new object to be pushed to the array
-                const newData = {id: completedTaskVals.id, content: completedTaskVals.content,  completed: completedTaskVals.completed}
+                const newData = {id: completedTaskVals.id, date: completedTaskVals, content: completedTaskVals.content,  completed: completedTaskVals.completed}
 
                 const indexOfItem = currentTaskArr.map(task => task.id).indexOf(newData.id);
                 currentTaskArr[indexOfItem] = newData

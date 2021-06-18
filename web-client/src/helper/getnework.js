@@ -56,6 +56,8 @@ export default async function getNetwork(todoListContract){
             chainName = "Unknown network?"
             break;
     }
+
+    // returning the chainname
     return { contract, chainName}
 }
 

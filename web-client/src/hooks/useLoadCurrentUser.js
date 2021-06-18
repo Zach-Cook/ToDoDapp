@@ -10,15 +10,20 @@ export default function useLoadCurrentUser(){
     // this gets the current chain id the user is operating with
     useEffect(()=>{
 
-        // when the network chain changes
-        window.ethereum.on('chainChanged', (_chainId) => {
-            setCurrentChainID(() => parseInt(_chainId))
-          });
+        if (window.ethereum){
+            // when the network chain changes
+            window.ethereum.on('chainChanged', (_chainId) => {
+                setCurrentChainID(() => parseInt(_chainId))
+            });
+            
+            // when the account changes reload the user account
+            window.ethereum.on('accountsChanged', ()=>{
+                loadTheUser()
+            })
+        } else{
+            window.alert("Download Metamask Extension to use this Dapp: https://metamask.io/")
+        }
         
-        // when the account changes reload the user account
-        window.ethereum.on('accountsChanged', ()=>{
-            loadTheUser()
-        })
 
         
     })
@@ -31,7 +36,7 @@ export default function useLoadCurrentUser(){
         const web3 = new Web3(window.ethereum)
 
         //check if MetaMask exists
-        if(typeof window.ethereum !== "undefined"){
+        if(window.ethereum){
             const netID = await web3.eth.net.getId()
             const accounts = await web3.eth.requestAccounts()
             let etherBalance = await web3.eth.getBalance(accounts[0])
@@ -47,7 +52,7 @@ export default function useLoadCurrentUser(){
                         })
     
         } else {
-            window.alert("You must install MetaMask to interact with this application")
+            window.alert("You must install MetaMask to interact with this application: https://metamask.io/")
         }}
 
 

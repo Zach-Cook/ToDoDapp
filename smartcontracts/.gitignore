@@ -1,7 +1,7 @@
 /_cacache
 /_locks
 anonymous-cli-metrics.json
-
+*.env
 
 # dependencies
 /node_modules

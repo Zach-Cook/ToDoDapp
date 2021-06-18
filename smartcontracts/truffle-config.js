@@ -12,6 +12,11 @@ module.exports = {
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
+     ropsten:  {
+     network_id: 3,
+     host: `https://ropsten.infura.io/v3/${process.env.PROJECT_ID}`,
+     port:  8545,
+     gas:   2900000
 
   },
 

@@ -39,15 +39,39 @@ export const AccountFrame = styled.div`
 
 `;
 
+export const TitleFrame = styled.div`
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
 export const Title = styled.h1`
 
     color: #FFFFFF;
     font-size: 24px;
     font-weight: normal;
 
-
+    margin: 0;
+    margin-bottom: 8px;
+    text-align-left;
+    width: 100%;
     @media screen and (min-width: 600px){
         font-size: 42px;
+    }
+
+`
+
+export const NetworkText = styled.p`
+    margin: 0;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: normal;
+    text-align-left;
+    width: 100%;
+
+    @media screen and (min-width: 600px){
+        font-size: 16px;
     }
 
 `
@@ -57,7 +81,6 @@ export const TitleText = styled.p`
     color: #FFFFFF;
     font-size: 14px;
     font-weight: normal;
-
     @media screen and (min-width: 600px){
         font-size: 18px;
     }

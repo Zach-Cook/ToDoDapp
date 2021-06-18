@@ -16,8 +16,11 @@ export default function HeaderContainer({children, ...restProps}){
         <Header {...restProps}>
             <Navigation>
                 <Navigation.NavInnerFrame>
+                    <Navigation.TitleFrame>
+                        <Navigation.Title>To Do Dapp</Navigation.Title>
+                        <Navigation.NetworkText>Blockchain: Ropsten</Navigation.NetworkText>
+                    </Navigation.TitleFrame>
                     
-                    <Navigation.Title>To Do Dapp</Navigation.Title>
 
                     <Navigation.AccountFrame>
                         {

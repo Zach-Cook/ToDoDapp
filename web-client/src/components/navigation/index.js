@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationFrame, NavInnerFrame, AccountFrame, Title, TitleText,  IconDiv} from './styles/navigation';
+import { NavigationFrame, NavInnerFrame, AccountFrame, TitleFrame, Title, TitleText, NetworkText, IconDiv} from './styles/navigation';
 
 export default function Navigation({children, ...restProps}){
 
@@ -15,8 +15,16 @@ Navigation.AccountFrame = function NavigationAccountFrame({children, ...restProp
     return <AccountFrame {...restProps}>{children}</AccountFrame>
 }
 
+Navigation.TitleFrame = function NavigationTitleFrame({children, ...restProps}) {
+    return <TitleFrame {...restProps}>{children}</TitleFrame>
+}
+
 Navigation.Title = function NavigationTitle({children, ...restProps}) {
     return <Title {...restProps}>{children}</Title>
+}
+
+Navigation.NetworkText = function NavigationNetworkText({children, ...restProps}) {
+    return <NetworkText {...restProps}>{children}</NetworkText>
 }
 
 Navigation.TitleText = function NavigationTitleText({children, ...restProps}) {

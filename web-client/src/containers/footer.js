@@ -9,7 +9,10 @@ export default function FooterContainer({children, ...restProps}){
         <Footer {...restProps}>
                 <Navigation>
                         <Navigation.NavInnerFrame>
-                            <Navigation.Title>To Do Dapp</Navigation.Title>
+                            <Navigation.TitleFrame style={{marginTop: "15px"}}>
+                                <Navigation.Title>To Do Dapp</Navigation.Title>
+                                <Navigation.NetworkText>Blockchain: Ropsten</Navigation.NetworkText>
+                            </Navigation.TitleFrame>
                                 <Navigation.AccountFrame justifyContent="flex-end">
                                     <Navigation.TitleText>Web Dapp Hosted on IPFS</Navigation.TitleText>
                                 </Navigation.AccountFrame>

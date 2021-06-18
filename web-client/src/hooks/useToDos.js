@@ -33,7 +33,6 @@ export default function useToDos(){
         setErrors(null)
         async function getData(){
             const { todoList, chainName } = await getNetwork(todoListContract)
-
             if (todoList){
                 let taskCount = await todoList.methods.taskCount().call()
                 // getting the users to do list ids and then making calls based off of that

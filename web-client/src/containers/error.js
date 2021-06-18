@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Error } from '../components';
 
-export default function ErrorContainer({currentNetwork, activeNetworks}){
+export default function ErrorContainer({currentNetwork, deployedNetworks}){
 
     return (
 
@@ -17,9 +17,9 @@ export default function ErrorContainer({currentNetwork, activeNetworks}){
                     To use this Dapp, please switch to one of our active networks inside your MetaMask app:
                 </Error.NetworkText>
                 {
-                    activeNetworks ?
-                    activeNetworks.map((network, index) =>(
-                        <Error.NetworkText key={index}>1.) {network}</Error.NetworkText>
+                    deployedNetworks ?
+                    deployedNetworks.map((network) =>(
+                        <Error.NetworkText key={network.netWorkID}>1.) {network.netWorkName}</Error.NetworkText>
                     ))
                     :
                     null

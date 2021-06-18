@@ -11,7 +11,7 @@ import { UserContext } from '../context/user';
 
 // custom hook
 import useToDos from '../hooks/useToDos';
-
+import useDeployedNetWorks from '../hooks/usedeployednetworks';
 
 
 
@@ -20,6 +20,7 @@ export default function Home(){
     const activeNetworks = process.env.REACT_APP_ACTIVE_NETWORKS.split(",");
     const { todos, createTask, toggleCompletion, removeTask, loading, errors, newTodo, setNewTodo } = useToDos()
     const { userState, loadTheUser } = useContext(UserContext)
+    const { deployedNetworks } = useDeployedNetWorks()
 
 
     return (
@@ -41,7 +42,7 @@ export default function Home(){
                     errors ?
                     <ErrorContainer 
                         currentNetwork={errors} 
-                        activeNetworks={activeNetworks}
+                        deployedNetworks={deployedNetworks}
                     />
                     :
                     <UserContainer loadTheUser={loadTheUser}/>

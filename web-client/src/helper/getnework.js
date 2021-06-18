@@ -12,6 +12,7 @@ export default async function getNetwork(todoListContract){
     let todoList;
     let chainName;
 
+
     switch (netID){
         case 1: //ETH
             chainName = "Ethereum Mainnet"

@@ -7,7 +7,7 @@ export const TodoFrame = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 80vh;
+    min-height: 75vh;
     background: #383F44;
     border-radius: 8px;
     margin: 40px 0;

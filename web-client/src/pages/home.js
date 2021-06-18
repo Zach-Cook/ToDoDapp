@@ -1,6 +1,7 @@
 import React, { useContext, Fragment} from 'react';
 import HeaderContainer from '../containers/header';
 import MainContainer from '../containers/main';
+import GetCryptoContainer from '../containers/getcrypto';
 import FooterContainer from '../containers/footer';
 import TodoContainer from '../containers/todo';
 import UserContainer from '../containers/user';
@@ -23,12 +24,11 @@ export default function Home(){
     const [ deployedNetworks ] = useDeployedNetWorks(todoListContract)
 
 
-    console.log(todos)
-
     return (
         <Fragment>
             <HeaderContainer/>
             <MainContainer>
+                <GetCryptoContainer/>
                 {
                     userState && !errors?
                     <TodoContainer

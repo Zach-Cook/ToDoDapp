@@ -118,6 +118,7 @@ export default function useToDos(){
         const { contract, chainName } = await getNetwork(todoListContract)
 
         if(contract){
+            setLoading(true)
             let currentTaskArr = [...todos.tasks]
             try {
                 
@@ -151,7 +152,7 @@ export default function useToDos(){
 
         if(contract){
             let currentTaskArr = [...todos.tasks]
-
+            setLoading(true)
             try {
 
                 const deletedTask = await contract.methods.removeTask(id).send({from: userState.account})
@@ -159,7 +160,7 @@ export default function useToDos(){
                 const indexOfItem = indexArray.indexOf(id.toString());
                 currentTaskArr.splice(indexOfItem, 1)
                 setToDos({...todos, tasks: currentTaskArr})
-
+                setLoading(false)
             } catch (err){
                 console.log(err)
             }

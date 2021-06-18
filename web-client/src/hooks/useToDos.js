@@ -32,16 +32,17 @@ export default function useToDos(){
     useEffect(()=>{
         setErrors(null)
         async function getData(){
-            const { todoList, chainName } = await getNetwork(todoListContract)
-            if (todoList){
-                let taskCount = await todoList.methods.taskCount().call()
+            const { contract, chainName } = await getNetwork(todoListContract)
+
+            if (contract){
+                let taskCount = await contract.methods.taskCount().call()
                 // getting the users to do list ids and then making calls based off of that
-                const usersTodolistIds = await todoList.methods.getUserTasks().call({from: userState.account})
+                const usersTodolistIds = await contract.methods.getUserTasks().call({from: userState.account})
                 // looping over the the itter count to get the mapping for the existing item
                 let taskArr = []
                 try {
                     for (let i = 0; i<usersTodolistIds.length; i++){
-                        let task = await todoList.methods.tasks(usersTodolistIds[i]).call()
+                        let task = await contract.methods.tasks(usersTodolistIds[i]).call()
                         if (task.id !== "0"){
                             taskArr.push(task)
                         }
@@ -79,12 +80,12 @@ export default function useToDos(){
     // this connects with the blockchain and creates the task
     async function createTask(content){
 
-        const { todoList, chainName } = await getNetwork(todoListContract)
+        const { contract, chainName } = await getNetwork(todoListContract)
 
-        if (todoList){
+        if (contract){
             setLoading(true)
             try {
-                const createdTask = await todoList.methods.createTask(content).send({from: userState.account})
+                const createdTask = await contract.methods.createTask(content).send({from: userState.account})
 
                 let currentTaskArr = [...todos.tasks]
 
@@ -113,13 +114,13 @@ export default function useToDos(){
     // toggles the check mark on the completed
     async function toggleCompletion(id){
 
-        const { todoList, chainName } = await getNetwork(todoListContract)
+        const { contract, chainName } = await getNetwork(todoListContract)
 
-        if(todoList){
+        if(contract){
             let currentTaskArr = [...todos.tasks]
             try {
                 
-                const completed = await todoList.methods.toggleCompleted(id).send({from: userState.account})
+                const completed = await contract.methods.toggleCompleted(id).send({from: userState.account})
                 // get the values from the smart contract event
                 const completedTaskVals = completed.events.TaskEvent.returnValues
                 // use the event to create a new object to be pushed to the array
@@ -145,14 +146,14 @@ export default function useToDos(){
     // this will remove the task from the list
     async function removeTask(id){
 
-        const { todoList, chainName } = await getNetwork(todoListContract)
+        const { contract, chainName } = await getNetwork(todoListContract)
 
-        if(todoList){
+        if(contract){
             let currentTaskArr = [...todos.tasks]
 
             try {
 
-                const deletedTask = await todoList.methods.removeTask(id).send({from: userState.account})
+                const deletedTask = await contract.methods.removeTask(id).send({from: userState.account})
                 const indexArray = currentTaskArr.map(e => e.id)
                 const indexOfItem = indexArray.indexOf(id.toString());
                 currentTaskArr.splice(indexOfItem, 1)

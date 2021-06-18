@@ -18,8 +18,8 @@ export default function ErrorContainer({currentNetwork, deployedNetworks}){
                 </Error.NetworkText>
                 {
                     deployedNetworks ?
-                    deployedNetworks.map((network) =>(
-                        <Error.NetworkText key={network.netWorkID}>1.) {network.netWorkName}</Error.NetworkText>
+                    deployedNetworks.map((network, index) =>(
+                        <Error.NetworkText key={network.netWorkID}>{index + 1}.) {network.netWorkName}</Error.NetworkText>
                     ))
                     :
                     null

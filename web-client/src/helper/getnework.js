@@ -7,12 +7,20 @@ export default async function getNetwork(todoListContract){
     const web3 = new Web3(window.ethereum)
     // get the network id
     const netID = await web3.eth.net.getId()
+
+
+    // if the contract with the current net id exists than create the new contract 
+    const contract =  
+        todoListContract.networks[netID]
+        ? 
+        new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address
+        ) 
+        : 
+        null;
+
+    let chainName;
     // this handles the chain id
     // currently if not on test net then this will cleanup the hook
-    let todoList;
-    let chainName;
-
-
     switch (netID){
         case 1: //ETH
             chainName = "Ethereum Mainnet"
@@ -43,13 +51,11 @@ export default async function getNetwork(todoListContract){
             break;
         case 5777: //Ganache
             chainName = "Ganache"
-            todoList = new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address)
             break;
         default: // Unknown network
             chainName = "Unknown network?"
-            todoList = null
             break;
     }
-    return { todoList, chainName}
+    return { contract, chainName}
 }
 

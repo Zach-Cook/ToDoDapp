@@ -12,7 +12,7 @@ Current Supported Networks include:
 
 ### Hosting ###
 
-This app Front-End is hosted on The IPFS protocol providing for decentralized web hosting.
+This app Front-End is hosted on the IPFS protocol providing for decentralized web hosting.
 
 It utilizes EVM compatible Blockchains as the backend for storing and updating data.
 

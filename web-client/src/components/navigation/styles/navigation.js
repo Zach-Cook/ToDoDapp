@@ -72,6 +72,7 @@ export const NetworkText = styled.p`
 
     @media screen and (min-width: 600px){
         font-size: 16px;
+        margin-bottom: 10px;
     }
 
 `

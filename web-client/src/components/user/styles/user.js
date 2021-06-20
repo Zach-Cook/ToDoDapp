@@ -39,4 +39,12 @@ export const LoginButton = styled.button`
     @media screen and (min-width: 600px){
         width: 20%;
     }
+
+    @media screen and (min-width: 1280px){
+        width: 30%;
+    }
+
+    @media screen and (min-width: 1920px){
+        width: 20%;
+    }
 `;

@@ -12,7 +12,7 @@ import getNetwork from '../helper/getnework'
 export default function useToDos(){
 
 
-    const { userState, currentChainID } = useContext(UserContext)
+    const { userState, currentChain } = useContext(UserContext)
     
 
     const [ todos, setToDos ] = useState({
@@ -75,7 +75,7 @@ export default function useToDos(){
             setNewTodo("")
         }
     // anytime the chain id or the state of the user changes then re-run this component
-    }, [currentChainID, userState])
+    }, [currentChain, userState])
 
     // this connects with the blockchain and creates the task
     async function createTask(content){

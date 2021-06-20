@@ -3,7 +3,7 @@ import Web3 from 'web3';
 
 
 
-export default async function getNetwork(todoListContract){
+export default async function getContract(todoListContract){
     const web3 = new Web3(window.ethereum)
     // get the network id
     const netID = await web3.eth.net.getId()
@@ -66,4 +66,3 @@ export default async function getNetwork(todoListContract){
     // returning the chainname
     return { contract, chainName}
 }
-

@@ -10,7 +10,10 @@ import { UserContext } from '../context/user';
 
 export default function HeaderContainer({children, ...restProps}){
 
-    const { userState } = useContext(UserContext)
+    const { userState, currentChain } = useContext(UserContext)
+
+
+    console.log(currentChain)
 
     return (
         
@@ -19,7 +22,12 @@ export default function HeaderContainer({children, ...restProps}){
                 <Navigation.NavInnerFrame>
                     <Navigation.TitleFrame>
                         <Navigation.Title>To Do Dapp</Navigation.Title>
-                        <Navigation.NetworkText>Blockchain: Ropsten</Navigation.NetworkText>
+                        {
+                            currentChain.chainName ?
+                        <Navigation.NetworkText>Blockchain: {currentChain.chainName}</Navigation.NetworkText>
+                            :
+                        <Navigation.NetworkText>Not connected:</Navigation.NetworkText>
+                        }
                     </Navigation.TitleFrame>
                     
 

@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import Web3 from 'web3';
 
+
 export default function useLoadCurrentUser(){
 
     const [ userState, setUserState ] = useState(null)
-    const [ currentChainID, setCurrentChainID ] = useState()
-
+    const [ currentChain, setCurrentChain] = useState({
+        chainName: null,
+        chainID: null
+    })
 
     // this gets the current chain id the user is operating with
     useEffect(()=>{
@@ -13,7 +16,11 @@ export default function useLoadCurrentUser(){
         if (window.ethereum){
             // when the network chain changes
             window.ethereum.on('chainChanged', (_chainId) => {
-                setCurrentChainID(() => parseInt(_chainId))
+                setCurrentChain({
+                    chainName: "Test",
+                    chainID: () => parseInt(_chainId),
+                    
+                })
             });
             
             // when the account changes reload the user account
@@ -42,21 +49,23 @@ export default function useLoadCurrentUser(){
             let etherBalance = await web3.eth.getBalance(accounts[0])
             etherBalance = web3.utils.fromWei(etherBalance)
 
-            
-
             setUserState({
                             account: accounts[0],
-                            etherBalance: etherBalance, 
-                            web3: web3,
-                            netID: netID
+                            etherBalance: etherBalance
                         })
+
+            setCurrentChain({
+                chainName: "chainName",
+                chainID: netID,
+                
+            })
     
         } else {
             window.alert("You must install MetaMask to interact with this application: https://metamask.io/")
         }}
 
 
-    return { userState, setUserState, loadTheUser, currentChainID}
+    return { userState, setUserState, loadTheUser, currentChain}
 
 
 }

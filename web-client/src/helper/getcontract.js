@@ -22,47 +22,7 @@ export default async function getContract(todoListContract){
         contract = null;
     }
     
-
-    let chainName;
-    // this handles the chain id
-    // currently if not on test net then this will cleanup the hook
-    switch (netID){
-        case 1: //ETH
-            chainName = "Ethereum Mainnet"
-            break;
-        case 3: //Ropsten
-            chainName = "Ropsten Testnet"
-            break;
-        case 4: //Rinkeby
-            chainName = "Rinkeby Testnet"
-            break;
-        case 5: //Goerli
-            chainName = "Goerli Testnet"
-            break;
-        case 42: //Kovan
-            chainName = "Kovan Testnet"
-            break;
-        case 56: //BNB
-            chainName = "Binance Smart Chain"
-            break;
-        case 128: //HT
-            chainName = "Heco"
-            break;
-        case 100: //xDai
-            chainName = "xDai Stable Chain"
-            break;
-        case 137: //Polygon
-            chainName = "Polygon Network"
-            break;
-        case 5777: //Ganache
-            chainName = "Ganache"
-            break;
-        default: // Unknown network
-            chainName = "Unknown network?"
-            break;
-    }
-    
     
     // returning the chainname
-    return { contract, chainName}
+    return { contract }
 }

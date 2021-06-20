@@ -12,9 +12,6 @@ export default function HeaderContainer({children, ...restProps}){
 
     const { userState, currentChain } = useContext(UserContext)
 
-
-    console.log(currentChain)
-
     return (
         
         <Header {...restProps}>
@@ -24,9 +21,9 @@ export default function HeaderContainer({children, ...restProps}){
                         <Navigation.Title>To Do Dapp</Navigation.Title>
                         {
                             currentChain.chainName ?
-                        <Navigation.NetworkText>Blockchain: {currentChain.chainName}</Navigation.NetworkText>
+                                <Navigation.NetworkText style={{color: "#009e60"}}>Connected: {currentChain.chainName}</Navigation.NetworkText>
                             :
-                        <Navigation.NetworkText>Not connected:</Navigation.NetworkText>
+                                <Navigation.NetworkText style={{color: "#EF5354"}}>Not connected</Navigation.NetworkText>
                         }
                     </Navigation.TitleFrame>
                     

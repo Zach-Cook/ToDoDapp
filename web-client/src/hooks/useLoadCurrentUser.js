@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import Web3 from 'web3';
 
+// helper
+import getNetwork from '../helper/getnework';
+
 
 export default function useLoadCurrentUser(){
 
@@ -13,23 +16,24 @@ export default function useLoadCurrentUser(){
     // this gets the current chain id the user is operating with
     useEffect(()=>{
 
-        if (window.ethereum){
-            // when the network chain changes
-            window.ethereum.on('chainChanged', (_chainId) => {
-                setCurrentChain({
-                    chainName: "Test",
-                    chainID: () => parseInt(_chainId),
-                    
+        async function getData(){
+
+            if (window.ethereum){
+
+                window.ethereum.on('chainChanged', (_chainId) => {                   
+                    loadTheUser()
+                });
+                
+                // when the account changes reload the user account
+                window.ethereum.on('accountsChanged', ()=>{
+                    loadTheUser()
                 })
-            });
-            
-            // when the account changes reload the user account
-            window.ethereum.on('accountsChanged', ()=>{
-                loadTheUser()
-            })
-        } else{
-            window.alert("Download Metamask Extension to use this Dapp: https://metamask.io/")
+            } else{
+                window.alert("Download Metamask Extension to use this Dapp: https://metamask.io/")
+            }
         }
+
+        getData()
         
 
         
@@ -41,6 +45,7 @@ export default function useLoadCurrentUser(){
     async function loadTheUser() {
 
         const web3 = new Web3(window.ethereum)
+        const { chainName } = await getNetwork()
 
         //check if MetaMask exists
         if(window.ethereum){
@@ -55,7 +60,7 @@ export default function useLoadCurrentUser(){
                         })
 
             setCurrentChain({
-                chainName: "chainName",
+                chainName: chainName,
                 chainID: netID,
                 
             })

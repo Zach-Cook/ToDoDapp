@@ -8,6 +8,7 @@ import todoListContract from '../contract-artifacts/TodoList.json'
 
 // helper
 import getNetwork from '../helper/getnework'
+import getContract from '../helper/getcontract';
 
 export default function useToDos(){
 
@@ -32,7 +33,10 @@ export default function useToDos(){
     useEffect(()=>{
         setErrors(null)
         async function getData(){
-            const { contract, chainName } = await getNetwork(todoListContract)
+
+            const { chainName } = await getNetwork()
+            const { contract } = await getContract(todoListContract)
+
 
             if (contract){
                 let taskCount = await contract.methods.taskCount().call()
@@ -80,7 +84,8 @@ export default function useToDos(){
     // this connects with the blockchain and creates the task
     async function createTask(content){
 
-        const { contract, chainName } = await getNetwork(todoListContract)
+        const { chainName } = await getNetwork()
+        const { contract } = await getContract(todoListContract)
         const timestamp = Date.now()
         if (contract){
             setLoading(true)
@@ -115,8 +120,8 @@ export default function useToDos(){
     // toggles the check mark on the completed
     async function toggleCompletion(id){
 
-        const { contract, chainName } = await getNetwork(todoListContract)
-
+        const { chainName } = await getNetwork(todoListContract)
+        const { contract } = await getContract(todoListContract)
         if(contract){
             setLoading(true)
             let currentTaskArr = [...todos.tasks]
@@ -148,8 +153,9 @@ export default function useToDos(){
     // this will remove the task from the list
     async function removeTask(id){
 
-        const { contract, chainName } = await getNetwork(todoListContract)
-
+        const { chainName } = await getNetwork(todoListContract)
+        const { contract } = await getContract(todoListContract)
+        
         if(contract){
             let currentTaskArr = [...todos.tasks]
             setLoading(true)

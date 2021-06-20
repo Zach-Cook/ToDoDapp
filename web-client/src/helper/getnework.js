@@ -8,19 +8,6 @@ export default async function getNetwork(todoListContract){
     // get the network id
     const netID = await web3.eth.net.getId()
 
-    let contract;
-    if (todoListContract){
-        // if the contract with the current net id exists than create the new contract 
-        contract =  
-        todoListContract.networks[netID]
-        ? 
-        new web3.eth.Contract(todoListContract.abi, todoListContract.networks[netID].address
-        ) 
-        : 
-        null;
-    } else {
-        contract = null;
-    }
     
 
     let chainName;
@@ -62,8 +49,8 @@ export default async function getNetwork(todoListContract){
             break;
     }
     
-    
+
     // returning the chainname
-    return { contract, chainName}
+    return { chainName}
 }
 

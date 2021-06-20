@@ -28,7 +28,7 @@ export default function Home(){
         <Fragment>
             <HeaderContainer/>
             <MainContainer>
-                <GetCryptoContainer/>
+                {/* <GetCryptoContainer/> */}
                 {
                     userState && !errors?
                     <TodoContainer
